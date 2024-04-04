@@ -1,0 +1,44 @@
+{
+  "name": "cms",
+  "description": "A blank template to get started with Payload",
+  "version": "1.0.0",
+  "main": "dist/server.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts nodemon",
+    "build:payload": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts payload build",
+    "build:server": "tsc",
+    "build": "yarn copyfiles && yarn build:payload && yarn build:server",
+    "serve": "cross-env PAYLOAD_CONFIG_PATH=dist/payload.config.js NODE_ENV=production node dist/server.js",
+    "copyfiles": "copyfiles -u 1 \"src/**/*.{html,css,scss,ttf,woff,woff2,eot,svg,jpg,png}\" dist/",
+    "generate:types": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts payload generate:types",
+    "generate:graphQLSchema": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts payload generate:graphQLSchema",
+    "payload": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts payload"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.529.1",
+    "@aws-sdk/lib-storage": "^3.529.1",
+    "@innovixx/payload-color-picker-field": "^1.1.0",
+    "@payloadcms/bundler-webpack": "^1.0.0",
+    "@payloadcms/db-postgres": "^0.7.0",
+    "@payloadcms/plugin-cloud-storage": "^1.1.1",
+    "@payloadcms/plugin-nested-docs": "^1.0.12",
+    "@payloadcms/plugin-redirects": "^1.0.1",
+    "@payloadcms/plugin-seo": "^2.2.1",
+    "@payloadcms/richtext-lexical": "^0.7.0",
+    "aws-crt": "^1.19.0",
+    "cross-env": "^7.0.3",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "lexical": "^0.13.1",
+    "payload": "^2.11.2",
+    "payload-blurhash-plugin": "^2.0.0",
+    "type-fest": "^4.12.0"
+
+  },
+  "devDependencies": {
+    "@payloadcms/eslint-config": "^1.1.1",
+    "copyfiles": "^2.4.1",
+    "nodemon": "^2.0.6"
+  }
+}
