@@ -18,11 +18,11 @@
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "paths": {
-      "@tasktime/dto": [
-        "packages/dto"
+      "@tasktime/utils": [
+        "packages/utils"
       ],
-      "@tasktime/dto/*": [
-        "packages/dto/src/*"
+      "@tasktime/utils/*": [
+        "packages/utils/src/*"
       ]
     }
   }
