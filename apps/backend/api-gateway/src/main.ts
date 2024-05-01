@@ -11,7 +11,7 @@ async function bootstrap() {
 
   const appName = `${configService.get<string>('APP_NAME')} API Gateway` || '';
   const appDescription = configService.get<string>('APP_DESCRIPTION') || '';
-  const port = configService.get<string>('API_GATEWAY_PORT') || '3000';
+  const port = configService.get<string>('API_GATEWAY_PORT') || '3301';
   const serverUrl = `${configService.get<string>('API_GATEWAY_URL') || 'localhost'}:${port}`;
   const apiPrefix = configService.get<string>('API_PREFIX') || 'api';
   const frontEndUrl = configService.get<string>('FRONTEND_URL') || 'localhost';

@@ -1,8 +1,8 @@
 import express from "express";
 import payload from "payload";
-import dotenv from "dotenv";
+// import dotenv from "dotenv";
 
-dotenv.config();
+// dotenv.config();
 
 const app = express();
 
@@ -21,7 +21,7 @@ const start = async () => {
     },
   });
 
-  app.listen(3000);
+  app.listen(parseInt(process.env.PAYLOAD_PORT, 10) || 3302);
 };
 
 start();
