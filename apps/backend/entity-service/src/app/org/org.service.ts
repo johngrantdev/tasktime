@@ -6,7 +6,7 @@ import { OrgCreatedEvent } from './event/orgCreated.event';
 import { EntityManager } from '@mikro-orm/postgresql';
 import { Org } from './entities/org.entity';
 import { OrgMember } from './orgMember/entities/orgMember.entity';
-import { OrgDto } from '@tasktime/dto';
+import { OrgDto } from '@tasktime/utils';
 import { orgToDto } from './utils/orgToDto';
 
 @Injectable()

@@ -14,7 +14,7 @@ import {
   DeleteItemDto,
   ItemDto,
   UpdateItemDto,
-} from '@tasktime/dto';
+} from '@tasktime/utils';
 import { itemToDto } from './utils/itemToDto';
 
 @Injectable()

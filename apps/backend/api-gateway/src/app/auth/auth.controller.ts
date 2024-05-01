@@ -16,7 +16,7 @@ import {
   EncryptedTokenDto,
   LoginResposneDto,
   PasswordlessLoginDto,
-} from '@tasktime/dto';
+} from '@tasktime/utils';
 import { firstValueFrom, timeout } from 'rxjs';
 import { AuthenticatedRequest } from '../shared/interfaces/authenticatedRequest';
 import { Response } from 'express';

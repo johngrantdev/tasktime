@@ -9,7 +9,7 @@ import {
   ViewProjectAbility,
 } from '../ability/ability.objects';
 import { MessagePattern, Payload } from '@nestjs/microservices';
-import { ProjectDto } from '@tasktime/dto';
+import { ProjectDto } from '@tasktime/utils';
 
 @Controller()
 @ApiTags('project')

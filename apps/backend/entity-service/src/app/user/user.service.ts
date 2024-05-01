@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { UserDto, UserIdDto, UserUpdatesDto } from '@tasktime/dto';
+import { UserDto, UserIdDto, UserUpdatesDto } from '@tasktime/utils';
 import { User } from './entities/user.entity';
 import { EntityManager } from '@mikro-orm/postgresql';
 import { userToDto } from './utils/userToDto';

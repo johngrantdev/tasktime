@@ -1,7 +1,7 @@
 import { MailerService } from './mailer.service';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { UserLoginDto } from '@tasktime/dto';
+import { UserLoginDto } from '@tasktime/utils';
 import { CustomMailOptions } from './types/customMailOptions.inteface';
 
 @Injectable()
