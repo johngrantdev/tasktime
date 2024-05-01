@@ -1,4 +1,4 @@
-import { ItemDto } from '@tasktime/dto';
+import { ItemDto } from '@tasktime/utils';
 import { Item } from '../entities/item.entity';
 
 export function itemToDto(item: Item): ItemDto {

@@ -8,7 +8,7 @@ import {
   UserEmailDto,
   UserIdDto,
   UpdateUserDto,
-} from '@tasktime/dto';
+} from '@tasktime/utils';
 import { SkipAuth } from '../shared/decorators/skipAuth.decorator';
 
 // This endpoint is used for own user profile

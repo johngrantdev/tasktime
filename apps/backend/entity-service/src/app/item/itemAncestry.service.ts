@@ -14,7 +14,7 @@ import {
   ItemAncestryRelationshipDto,
   ItemDescendantsDto,
   getItemDescendantsDto,
-} from '@tasktime/dto';
+} from '@tasktime/utils';
 import { itemToDto } from './utils/itemToDto';
 
 @Injectable()

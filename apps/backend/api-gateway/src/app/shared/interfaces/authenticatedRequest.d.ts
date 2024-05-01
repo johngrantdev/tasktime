@@ -1,4 +1,4 @@
-import { TokenPayloadDto } from '@tasktime/dto';
+import { TokenPayloadDto } from '@tasktime/utils';
 import { Request } from 'express';
 
 interface AuthenticatedRequest extends Request {
