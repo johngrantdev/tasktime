@@ -1,0 +1,39 @@
+version: '3.8'
+
+# Development Environment
+# - NATS is used for communication between backend microservices
+# - Postgres is used by Entity Service and CMS
+
+services:
+  dev-nats:
+    image: nats:latest
+    container_name: dev-nats
+    ports:
+      - "8222:8222" # Monitoring port
+      - "4222:4222" # Client connections
+      - "4223:4223" # Cluster routes
+    command: ["-m", "8222", "-DV"]
+    networks:
+      - dev_network
+
+  dev-postgres:
+    image: postgres:latest
+    container_name: dev-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: $DEFAULT_DB
+      POSTGRES_USER: $DB_USER
+      POSTGRES_PASSWORD: $DB_PASS
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./postgres/init:/docker-entrypoint-initdb.d
+    networks:
+      - dev_network
+
+volumes:
+  postgres_data:
+
+networks:
+  dev_network:
+    driver: bridge
