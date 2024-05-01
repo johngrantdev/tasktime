@@ -1,6 +1,8 @@
 **/node_modules/**
-build/**
-dist/**
-.next/**
+**/build/**
+**/dist/**
+**/.next/**
 .env
 .turbo
+
+**/tsconfig.build.tsbuildinfo
