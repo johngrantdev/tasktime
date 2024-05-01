@@ -8,7 +8,7 @@ import { Reflector } from '@nestjs/core';
 import { IS_PUBLIC_KEY } from '../decorators/skipAuth.decorator';
 import { ClientProxy } from '@nestjs/microservices';
 import { firstValueFrom } from 'rxjs';
-import { GetUserDto, TokenPayloadDto, UserDto } from '@tasktime/dto';
+import { GetUserDto, TokenPayloadDto, UserDto } from '@tasktime/utils';
 
 @Injectable()
 export class JwtAuthGuard implements CanActivate {

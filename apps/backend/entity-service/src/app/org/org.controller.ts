@@ -17,7 +17,7 @@ import {
   UpdateOrgDto,
   DeleteOrgDto,
   OrgDto,
-} from '@tasktime/dto';
+} from '@tasktime/utils';
 
 @Controller()
 @ApiTags('org')
