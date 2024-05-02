@@ -2,7 +2,7 @@
 **/build/**
 **/dist/**
 **/.next/**
+**/*.tsbuildinfo
+
 .env
 .turbo
-
-**/tsconfig.build.tsbuildinfo
