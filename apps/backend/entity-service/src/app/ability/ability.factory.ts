@@ -12,7 +12,7 @@ import { ProjectService } from '../project/project.service';
 import { ItemService } from '../item/item.service';
 import { defineAbilityDto } from './dto/defineAbility.dto';
 import { ItemMemberRole } from '../item/enum/itemMemberRole.enum';
-import { ItemDto, OrgDto, ProjectDto } from '@tasktime/utils';
+import { ItemDto, OrgDto, ProjectDto } from 'tasktime-utils';
 import { OrgMemberService } from '../org/orgMember/orgMember.service';
 
 export enum Action {

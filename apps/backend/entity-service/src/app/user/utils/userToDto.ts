@@ -1,4 +1,4 @@
-import { UserDto } from '@tasktime/utils';
+import { UserDto } from 'tasktime-utils';
 import { User } from '../entities/user.entity';
 
 export function userToDto(user: User): UserDto {

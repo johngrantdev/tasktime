@@ -9,9 +9,9 @@ import { Org } from '../org/entities/org.entity';
 import { User } from '../user/entities/user.entity';
 import { ProjectMember } from './entities/projectMember.entity';
 import { ProjectMemberRole } from './enum/projectMemberRole.enum';
-import { ProjectDto } from '@tasktime/utils';
+import { ProjectDto } from 'tasktime-utils';
 import { projectToDto } from './utils/projectToDto';
-import { CreateProjectDto, UpdateProjectDto } from '@tasktime/utils';
+import { CreateProjectDto, UpdateProjectDto } from 'tasktime-utils';
 
 @Injectable()
 export class ProjectService {

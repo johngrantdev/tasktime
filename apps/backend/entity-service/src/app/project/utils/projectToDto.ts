@@ -1,4 +1,4 @@
-import { ProjectDto } from '@tasktime/utils';
+import { ProjectDto } from 'tasktime-utils';
 import { Project } from '../entities/project.entity';
 
 export function projectToDto(project: Project): ProjectDto {

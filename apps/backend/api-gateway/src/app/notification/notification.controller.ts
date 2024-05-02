@@ -1,6 +1,5 @@
 import { Controller, Delete, Get, Inject, Param, Req } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { Notification } from './entities/notification.entity';
 import { API_PREFIX } from '../shared/config';
 import { ClientProxy } from '@nestjs/microservices';
 import { firstValueFrom } from 'rxjs';

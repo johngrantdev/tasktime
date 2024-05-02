@@ -1,4 +1,4 @@
-import { OrgDto } from '@tasktime/utils';
+import { OrgDto } from 'tasktime-utils';
 import { Org } from '../entities/org.entity';
 
 export function orgToDto(org: Org): OrgDto {

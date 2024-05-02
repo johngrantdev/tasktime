@@ -1,4 +1,4 @@
-import { ItemDto, OrgDto, ProjectDto } from '@tasktime/utils';
+import { ItemDto, OrgDto, ProjectDto } from 'tasktime-utils';
 import { RequiredRule } from '../shared/decorators/abilities.decorator';
 import { Action } from './ability.factory';
 

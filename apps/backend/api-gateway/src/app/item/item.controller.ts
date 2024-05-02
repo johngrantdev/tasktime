@@ -20,7 +20,7 @@ import { GetItemDto } from './dto/getItem.dto';
 import { firstValueFrom } from 'rxjs';
 import { CreateItemAncestryDto } from './dto/createItemAncestry.dto';
 import { UpdateItemDto } from './dto/updateItem.dto';
-import { GetAllItemsDto } from '@tasktime/utils';
+import { GetAllItemsDto } from 'tasktime-utils';
 import { AuthenticatedRequest } from '../shared/interfaces/authenticatedRequest';
 
 @Controller(`${API_PREFIX}/org/:orgId/project/:projectId/item`)

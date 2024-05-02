@@ -10,7 +10,7 @@ import {
   UserEmailDto,
   LoginResposneDto,
   TokenPayloadDto,
-} from '@tasktime/utils';
+} from 'tasktime-utils';
 import { ClientProxy, RpcException } from '@nestjs/microservices';
 import { firstValueFrom } from 'rxjs';
 import { ConfigService } from '@nestjs/config';

@@ -22,7 +22,7 @@ import {
   ItemDto,
   UpdateItemDto,
   getItemDescendantsDto,
-} from '@tasktime/utils';
+} from 'tasktime-utils';
 
 @Controller()
 @ApiTags('item')

@@ -15,7 +15,7 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { API_PREFIX } from '../shared/config';
 import { ClientProxy } from '@nestjs/microservices';
 import { firstValueFrom } from 'rxjs';
-import { AllOrgsDto, OrgDto } from '@tasktime/utils';
+import { AllOrgsDto, OrgDto } from 'tasktime-utils';
 import { AuthenticatedRequest } from '../shared/interfaces/authenticatedRequest';
 
 @Controller(`${API_PREFIX}/org`)

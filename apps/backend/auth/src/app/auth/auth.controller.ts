@@ -6,7 +6,7 @@ import {
   EncryptedTokenDto,
   LoginResposneDto,
   PasswordlessLoginDto,
-} from '@tasktime/utils';
+} from 'tasktime-utils';
 
 @Controller('auth')
 export class AuthController {

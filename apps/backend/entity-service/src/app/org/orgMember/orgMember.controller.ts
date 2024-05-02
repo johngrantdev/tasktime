@@ -2,7 +2,7 @@ import { Controller } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { OrgMemberService } from './orgMember.service';
-import { GetOrgMemberDto, RemoveOrgMemberDto } from '@tasktime/utils';
+import { GetOrgMemberDto, RemoveOrgMemberDto } from 'tasktime-utils';
 
 @Controller()
 @ApiTags('org')
