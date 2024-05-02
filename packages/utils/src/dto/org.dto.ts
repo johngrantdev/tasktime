@@ -53,7 +53,7 @@ export class GetOrgDto {
 export class NewOrgDto {
   @IsString()
   @IsNotEmpty()
-  name: string;
+  name = "";
 }
 
 export class CreateOrgDto {
@@ -61,18 +61,18 @@ export class CreateOrgDto {
   userId = "";
 
   @IsObject()
-  newOrg: NewOrgDto;
+  newOrg: NewOrgDto = new NewOrgDto();
 }
 
 export class OrgUpdatesDto {
   @IsOptional()
   @IsString()
   @IsNotEmpty()
-  name: string;
+  name: string | undefined;
 
   @IsOptional()
   @IsString()
-  description: string;
+  description: string | undefined;
 }
 
 export class UpdateOrgDto {
@@ -80,7 +80,7 @@ export class UpdateOrgDto {
   orgId = "";
 
   @IsObject()
-  orgUpdates: OrgUpdatesDto;
+  orgUpdates: OrgUpdatesDto = new OrgUpdatesDto();
 }
 
 export class DeleteOrgDto {

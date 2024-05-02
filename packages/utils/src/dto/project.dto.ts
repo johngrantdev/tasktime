@@ -88,7 +88,7 @@ export class NewProjectDto {
 
   @IsString()
   @IsNotEmpty()
-  orgId: string;
+  orgId = "";
 
   @IsOptional()
   @IsString()
@@ -129,7 +129,7 @@ export class ProjectChangesDto {
   @IsOptional()
   @IsBoolean()
   @IsNotEmpty()
-  isHidden: boolean;
+  isHidden = false;
 }
 
 export class DeleteProjectDto {

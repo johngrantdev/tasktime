@@ -2,19 +2,19 @@ import { IsUUID } from "class-validator";
 
 export class GetOrgMemberDto {
   @IsUUID()
-  memberId: string;
+  memberId = "";
 
   @IsUUID()
-  orgId: string;
+  orgId = "";
 }
 
 export class RemoveOrgMemberDto {
   @IsUUID()
-  userId: string;
+  userId = "";
 
   @IsUUID()
-  memberId: string;
+  memberId = "";
 
   @IsUUID()
-  orgId: string;
+  orgId = "";
 }
