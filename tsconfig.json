@@ -16,14 +16,6 @@
     "noImplicitAny": true,
     "strictBindCallApply": true,
     "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "paths": {
-      "@tasktime/utils": [
-        "packages/utils"
-      ],
-      "@tasktime/utils/*": [
-        "packages/utils/src/*"
-      ]
-    }
+    "noFallthroughCasesInSwitch": true
   }
 }
