@@ -20,6 +20,8 @@ export default defineConfig({
       'apps/backend/entity-service/src/app/project/test/project.service.spec.ts',
       'apps/backend/entity-service/src/app/item/test/itemAncestry.service.spec.ts',
       'apps/backend/api-gateway/src/app/shared/test/natsSubjectContract.spec.ts',
+      'apps/backend/api-gateway/src/app/shared/test/appModule.spec.ts',
+      'apps/backend/entity-service/src/app/shared/test/appModule.spec.ts',
     ],
   },
   resolve: {
