@@ -58,7 +58,7 @@ export class OrgService {
       throw new Error(`${orgId} not found.`);
     }
     localEm.assign(org, orgUpdates);
-    this.em.persist(org).flush();
+    await localEm.persist(org).flush();
     return orgToDto(org);
   }
 

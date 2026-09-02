@@ -62,6 +62,7 @@ export class ProjectService {
       throw new Error(`Project with ID ${data.projectId} not found`);
     }
     localEm.assign(project, data.projectChanges);
+    await localEm.persist(project).flush();
     return projectToDto(project);
   }
 
