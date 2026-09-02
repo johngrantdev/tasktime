@@ -50,7 +50,6 @@ describe('ProjectService update', () => {
 
     await service.updateProject({
       userId: 'user-id',
-      orgId: 'org-id',
       projectId: 'project-id',
       projectChanges: { description: 'changed', isHidden: false },
     });

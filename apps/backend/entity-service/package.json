@@ -12,7 +12,8 @@
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "migration:create": "pnpm build && mikro-orm migration:create",
-    "migration:up": "pnpm build && mikro-orm migration:up"
+    "migration:up": "pnpm build && mikro-orm migration:up",
+    "typecheck": "tsc --project tsconfig.json --noEmit"
   },
   "dependencies": {
     "@casl/ability": "^6.7.1",

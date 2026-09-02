@@ -11,6 +11,7 @@ export default defineConfig({
     root: '.',
     include: [
       'apps/backend/communication/src/app/app.controller.spec.ts',
+      'apps/backend/communication/src/app/mail/test/mail.service.spec.ts',
       'apps/backend/communication/src/app/app.service.spec.ts',
       'apps/backend/communication/src/app/test/test.service.spec.ts',
       'apps/backend/entity-service/src/app/app.service.spec.ts',

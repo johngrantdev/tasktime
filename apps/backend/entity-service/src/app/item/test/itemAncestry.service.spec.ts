@@ -20,6 +20,7 @@ describe('ItemAncestryService', () => {
     const service = new ItemAncestryService(em as unknown as EntityManager);
 
     await service.createItemAncestry({
+      userId: 'user-id',
       ancestorItemId: 'ancestor-id',
       descendantItemId: 'descendant-id',
     });
