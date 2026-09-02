@@ -16,7 +16,7 @@
     "typecheck": "tsc --project tsconfig.json --noEmit"
   },
   "dependencies": {
-    "@casl/ability": "^6.7.1",
+    "@casl/ability": "^7.0.1",
     "@mikro-orm/core": "^7.1.14",
     "@mikro-orm/decorators": "^7.1.14",
     "@mikro-orm/nestjs": "^7.1.0",
