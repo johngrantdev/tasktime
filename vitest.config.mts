@@ -22,6 +22,7 @@ export default defineConfig({
       'apps/backend/api-gateway/src/app/shared/test/natsSubjectContract.spec.ts',
       'apps/backend/api-gateway/src/app/shared/test/appModule.spec.ts',
       'apps/backend/entity-service/src/app/shared/test/appModule.spec.ts',
+      'apps/backend/entity-service/src/app/user/test/user.entity.spec.ts',
     ],
   },
   resolve: {
