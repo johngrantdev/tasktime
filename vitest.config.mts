@@ -25,6 +25,7 @@ export default defineConfig({
       'apps/backend/entity-service/src/app/user/test/user.entity.spec.ts',
       'apps/backend/entity-service/src/app/org/orgMember/test/orgMember.listener.spec.ts',
       'apps/backend/entity-service/src/app/org/test/org.service.spec.ts',
+      'apps/backend/entity-service/src/app/shared/guards/test/abilities.guard.spec.ts',
     ],
   },
   resolve: {

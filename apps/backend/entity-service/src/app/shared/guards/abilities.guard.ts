@@ -27,18 +27,25 @@ export class AbilitiesGuard implements CanActivate {
       this.reflector.get<RequiredRule[]>(CHECK_ABILITY, context.getHandler()) ||
       [];
 
-    const payload = context.switchToRpc().getData();
-    console.log(payload.userId);
-    console.log(payload.orgId);
+    // A handler that declares no rules has not been reviewed for access
+    // control, so it is denied rather than silently allowed. Handlers that
+    // only ever touch the caller's own rows opt out with @SkipAuth.
+    if (rules.length === 0) {
+      return false;
+    }
 
-    const ability = await this.caslAbilityFactory.defineAbility({
-      userId: payload.userId,
-      orgId: payload.orgId,
-      projectId: payload.projectId,
-      itemId: payload.itemId,
-    });
+    const payload = context.switchToRpc().getData();
 
     try {
+      // building the ability reads membership rows, and a missing membership
+      // throws - that is a denial, not a server error.
+      const ability = await this.caslAbilityFactory.defineAbility({
+        userId: payload.userId,
+        orgId: payload.orgId,
+        projectId: payload.projectId,
+        itemId: payload.itemId,
+      });
+
       for (const rule of rules) {
         ForbiddenError.from(ability).throwUnlessCan(rule.action, rule.subject);
       }

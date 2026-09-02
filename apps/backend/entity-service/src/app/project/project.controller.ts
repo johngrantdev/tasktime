@@ -2,6 +2,7 @@ import { Controller } from '@nestjs/common';
 import { ProjectService } from './project.service';
 import { ApiTags } from '@nestjs/swagger';
 import { CheckAbilities } from '../shared/decorators/abilities.decorator';
+import { SkipAuth } from '../shared/decorators/skipAuth.decorator';
 import {
   CreateProjectAbility,
   DeleteProjectAbility,
@@ -23,8 +24,10 @@ import {
 export class ProjectController {
   constructor(private readonly projectService: ProjectService) {}
 
+  // Returns only the projects the caller is a member of, so there is no
+  // resource to check an ability against.
   @MessagePattern('project.getAllProjects')
-  // @CheckAbilities(new ViewProjectAbility())
+  @SkipAuth()
   async getAllProjects(
     @Payload() data: GetAllPropjectsDto,
   ): Promise<ProjectDto[]> {

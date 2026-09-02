@@ -105,13 +105,6 @@ export class UserUpdatesDto {
   @IsBoolean()
   @IsNotEmpty()
   disabled?: boolean;
-
-  constructor(data: UserUpdatesDto) {
-    this.firstName = data.firstName;
-    this.lastName = data.lastName;
-    this.avatar = data.avatar;
-    this.disabled = data.disabled;
-  }
 }
 
 export class UpdateUserDto {

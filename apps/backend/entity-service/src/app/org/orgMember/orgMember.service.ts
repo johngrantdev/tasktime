@@ -40,7 +40,7 @@ export class OrgMemberService {
   ): Promise<undefined> {
     const localEm = this.em.fork();
     const orgMember = await localEm.findOne(OrgMember, {
-      member: userId,
+      member: memberId,
       org: orgId,
     });
     if (!orgMember) {

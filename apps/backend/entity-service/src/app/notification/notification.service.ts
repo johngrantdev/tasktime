@@ -75,7 +75,10 @@ export class NotificationService {
     notificationId: string,
   ): Promise<void> {
     const localEm = this.em.fork();
-    const notification = await localEm.findOne(Notification, notificationId);
+    const notification = await localEm.findOne(Notification, {
+      id: notificationId,
+      user: userId,
+    });
     if (!notification) {
       throw new NotFoundException(this.notFoundError);
     }
