@@ -39,9 +39,9 @@ export class AbilitiesGuard implements CanActivate {
     });
 
     try {
-      rules.forEach((rule) =>
-        ForbiddenError.from(ability).throwUnlessCan(rule.action, rule.subject),
-      );
+      for (const rule of rules) {
+        ForbiddenError.from(ability).throwUnlessCan(rule.action, rule.subject);
+      }
 
       return true;
     } catch (error) {
