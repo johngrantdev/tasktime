@@ -1,1 +1,0 @@
-CREATE DATABASE tasktime_cms_db;

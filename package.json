@@ -12,8 +12,7 @@
   "dependencies": {
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
-    "dotenv-cli": "^7.4.1",
-    "swagger": "^0.7.5"
+    "dotenv-cli": "^7.4.1"
   },
   "devDependencies": {
     "@types/jest": "^29.5.2",
@@ -32,7 +31,6 @@
     "ts-loader": "^9.4.3",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0",
-    "type-fest": "^4.15.0",
     "typescript": "^5.4.4"
   },
   "jest": {

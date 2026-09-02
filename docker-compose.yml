@@ -1,8 +1,6 @@
-version: '3.8'
-
 # Development Environment
 # - NATS is used for communication between backend microservices
-# - Postgres is used by Entity Service and CMS
+# - Postgres is used by the Entity Service
 
 services:
   dev-nats:
