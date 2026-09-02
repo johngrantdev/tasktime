@@ -1,7 +1,8 @@
-import { Controller, Delete, Get, Param, Req } from '@nestjs/common';
-import { NotificationService } from './notification.service';
+import { Controller } from '@nestjs/common';
+import { MessagePattern, Payload } from '@nestjs/microservices';
 import { ApiTags } from '@nestjs/swagger';
-import { UserRequestDto } from '../user/dto/userRequest.dto';
+import { NotificationService } from './notification.service';
+import { NotificationRequestDto } from './dto/notificationRequest.dto';
 import { Notification } from './entities/notification.entity';
 
 @Controller()
@@ -9,28 +10,21 @@ import { Notification } from './entities/notification.entity';
 export class NotificationController {
   constructor(private readonly notificationService: NotificationService) {}
 
-  @Get(':notificationId')
+  @MessagePattern('notification.get')
   async getNotification(
-    @Req() req: UserRequestDto,
-    @Param('notificationId') notificationId: string,
+    @Payload() data: NotificationRequestDto,
   ): Promise<Notification | undefined> {
-    const notification = await this.notificationService.getNotification(
-      req.user.id,
-      notificationId,
+    return await this.notificationService.getNotification(
+      data.userId,
+      data.notificationId,
     );
-    if (notification) {
-      return notification;
-    }
   }
 
-  @Delete(':notificationId')
-  async deleteNotification(
-    @Req() req: UserRequestDto,
-    @Param('notificationId') notificationId: string,
-  ) {
+  @MessagePattern('notification.delete')
+  async deleteNotification(@Payload() data: NotificationRequestDto) {
     await this.notificationService.deleteNotification(
-      req.user.id,
-      notificationId,
+      data.userId,
+      data.notificationId,
     );
   }
 }

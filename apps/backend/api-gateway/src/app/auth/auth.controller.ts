@@ -18,8 +18,8 @@ import {
   PasswordlessLoginDto,
 } from 'tasktime-utils';
 import { firstValueFrom, timeout } from 'rxjs';
-import { AuthenticatedRequest } from '../shared/interfaces/authenticatedRequest';
-import { Response } from 'express';
+import type { AuthenticatedRequest } from '../shared/interfaces/authenticatedRequest';
+import type { Response } from 'express';
 
 const SERVICE_UNAVAILABLE_MSG = 'Auth service is currently unavailable.';
 
@@ -115,7 +115,7 @@ export class AuthController {
     description: 'Returns loggedOut state',
   })
   revoke(@Req() req: AuthenticatedRequest, @Res() res: Response) {
-    this.natClient.emit('auth.revokeAllTokenValidity', req.user.id);
+    this.natClient.emit('user.revokeAllTokenValidity', { userId: req.user.id });
     // res.clearCookie('jwt', { path: '/' });
     // return res.send({ loggedOut: true });
     return res.send({ revoked: true });

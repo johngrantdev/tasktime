@@ -17,10 +17,12 @@ import { API_PREFIX } from '../shared/config';
 import { ClientProxy } from '@nestjs/microservices';
 import { GetItemDto } from './dto/getItem.dto';
 import { firstValueFrom } from 'rxjs';
-import { CreateItemAncestryDto } from './dto/createItemAncestry.dto';
-import { UpdateItemDto } from './dto/updateItem.dto';
-import { GetAllItemsDto } from 'tasktime-utils';
-import { AuthenticatedRequest } from '../shared/interfaces/authenticatedRequest';
+import {
+  GetAllItemsDto,
+  ItemAncestryRelationshipDto,
+  ItemChangesDto,
+} from 'tasktime-utils';
+import type { AuthenticatedRequest } from '../shared/interfaces/authenticatedRequest';
 
 @Controller(`${API_PREFIX}/org/:orgId/project/:projectId/item`)
 @ApiTags('item')
@@ -71,13 +73,13 @@ export class ItemController {
   async updateItem(
     @Req() req: AuthenticatedRequest,
     @Param('itemId') itemId: string,
-    @Body() changes: UpdateItemDto,
+    @Body() changes: ItemChangesDto,
   ) {
     return await firstValueFrom(
       this.natClient.send('item.updateItem', {
         userId: req.user.id,
         itemId: itemId,
-        changes: changes,
+        itemChanges: changes,
       }),
     );
   }
@@ -107,7 +109,7 @@ export class ItemController {
       this.natClient.send('item.getDescendants', {
         userId: req.user.id,
         itemId: itemId,
-        depth: depth ? parseInt(depth, 10) : 5,
+        inputDepth: depth ? parseInt(depth, 10) : 5,
       }),
     );
   }
@@ -115,13 +117,14 @@ export class ItemController {
   @Post('relationship')
   async createItemAncestry(
     @Req() req: AuthenticatedRequest,
-    @Body() newItem: CreateItemAncestryDto,
+    @Body() relationship: ItemAncestryRelationshipDto,
   ) {
     //: Promise<ItemAncestry>
     return await firstValueFrom(
-      this.natClient.send('item.createAncestry', {
+      this.natClient.send('item.createItemAncestry', {
         userId: req.user.id,
-        newItem: newItem,
+        ancestorItemId: relationship.ancestorItemId,
+        descendantItemId: relationship.descendantItemId,
       }),
     );
   }
@@ -132,7 +135,7 @@ export class ItemController {
     @Param('itemAncestryId') itemAncestryId: string,
   ): Promise<undefined> {
     return await firstValueFrom(
-      this.natClient.send('item.deleteAncestry', {
+      this.natClient.send('item.deleteItemAncestry', {
         userId: req.user.id,
         itemAncestryId: itemAncestryId,
       }),

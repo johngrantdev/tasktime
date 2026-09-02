@@ -3,7 +3,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { API_PREFIX } from '../shared/config';
 import { ClientProxy } from '@nestjs/microservices';
 import { firstValueFrom } from 'rxjs';
-import { AuthenticatedRequest } from '../shared/interfaces/authenticatedRequest';
+import type { AuthenticatedRequest } from '../shared/interfaces/authenticatedRequest';
 
 @Controller(`${API_PREFIX}/notification`)
 @ApiTags('notification')
