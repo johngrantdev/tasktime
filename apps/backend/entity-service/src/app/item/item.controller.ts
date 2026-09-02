@@ -2,6 +2,7 @@ import { Controller } from '@nestjs/common';
 import { ItemService } from './item.service';
 import { ApiTags } from '@nestjs/swagger';
 import { CheckAbilities } from '../shared/decorators/abilities.decorator';
+import { SkipAuth } from '../shared/decorators/skipAuth.decorator';
 import {
   CreateItemAbility,
   DeleteItemAbility,
@@ -32,8 +33,10 @@ export class ItemController {
     private itemAncestryService: ItemAncestryService,
   ) {}
 
+  // Returns only the items the caller is a member of, so there is no
+  // resource to check an ability against.
   @MessagePattern('item.getAllItems')
-  @CheckAbilities(new ViewItemAbility())
+  @SkipAuth()
   async getAllItems(@Payload() data: GetAllItemsDto): Promise<ItemDto[]> {
     return await this.itemService.getAllItems(data.userId);
   }
@@ -71,6 +74,8 @@ export class ItemController {
     return this.itemAncestryService.getItemDescendants(data);
   }
 
+  // An ancestry row is part of a project's item structure, so both handlers
+  // require project-member rights - which is what Create ItemDto grants.
   @MessagePattern('item.createItemAncestry')
   @CheckAbilities(new CreateItemAbility())
   async createItemAncestry(
@@ -80,7 +85,7 @@ export class ItemController {
   }
 
   @MessagePattern('item.deleteItemAncestry')
-  @CheckAbilities(new DeleteItemAbility())
+  @CheckAbilities(new CreateItemAbility())
   async deleteItemAncestry(
     @Payload() data: DeleteItemAncestryDto,
   ): Promise<undefined> {

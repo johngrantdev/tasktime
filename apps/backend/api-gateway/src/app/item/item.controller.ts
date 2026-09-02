@@ -15,7 +15,6 @@ import { ApiTags } from '@nestjs/swagger';
 
 import { API_PREFIX } from '../shared/config';
 import { ClientProxy } from '@nestjs/microservices';
-import { GetItemDto } from './dto/getItem.dto';
 import { firstValueFrom } from 'rxjs';
 import {
   GetAllItemsDto,
@@ -44,11 +43,15 @@ export class ItemController {
   @Get(':itemId')
   async getItem(
     @Req() req: AuthenticatedRequest,
-    @Param('itemId') itemId: GetItemDto,
+    @Param('orgId') orgId: string,
+    @Param('projectId') projectId: string,
+    @Param('itemId') itemId: string,
   ) {
     return await firstValueFrom(
       this.natClient.send('item.getItem', {
         userId: req.user.id,
+        orgId: orgId,
+        projectId: projectId,
         itemId: itemId,
       }),
     );
@@ -57,12 +60,14 @@ export class ItemController {
   @Post()
   async createItem(
     @Req() req: AuthenticatedRequest,
+    @Param('orgId') orgId: string,
     @Param('projectId') projectId: string,
     @Body() newItem: NewItemDto,
   ) {
     return await firstValueFrom(
       this.natClient.send('item.createItem', {
         userId: req.user.id,
+        orgId: orgId,
         projectId: projectId,
         newItem: newItem,
       }),
@@ -72,12 +77,16 @@ export class ItemController {
   @Patch(':itemId')
   async updateItem(
     @Req() req: AuthenticatedRequest,
+    @Param('orgId') orgId: string,
+    @Param('projectId') projectId: string,
     @Param('itemId') itemId: string,
     @Body() changes: ItemChangesDto,
   ) {
     return await firstValueFrom(
       this.natClient.send('item.updateItem', {
         userId: req.user.id,
+        orgId: orgId,
+        projectId: projectId,
         itemId: itemId,
         itemChanges: changes,
       }),
@@ -87,11 +96,15 @@ export class ItemController {
   @Delete(':itemId')
   async deleteItem(
     @Req() req: AuthenticatedRequest,
+    @Param('orgId') orgId: string,
+    @Param('projectId') projectId: string,
     @Param('itemId') itemId: string,
   ) {
     return await firstValueFrom(
       this.natClient.send('item.deleteItem', {
         userId: req.user.id,
+        orgId: orgId,
+        projectId: projectId,
         itemId: itemId,
       }),
     );
@@ -101,6 +114,8 @@ export class ItemController {
   @Get(':itemId/descendants')
   async getItemDescendants(
     @Req() req: AuthenticatedRequest,
+    @Param('orgId') orgId: string,
+    @Param('projectId') projectId: string,
     @Param('itemId') itemId: string,
     @Query('depth') depth?: string,
   ) {
@@ -108,6 +123,8 @@ export class ItemController {
     return await firstValueFrom(
       this.natClient.send('item.getDescendants', {
         userId: req.user.id,
+        orgId: orgId,
+        projectId: projectId,
         itemId: itemId,
         inputDepth: depth ? parseInt(depth, 10) : 5,
       }),
@@ -117,12 +134,17 @@ export class ItemController {
   @Post('relationship')
   async createItemAncestry(
     @Req() req: AuthenticatedRequest,
+    @Param('orgId') orgId: string,
+    @Param('projectId') projectId: string,
     @Body() relationship: ItemAncestryRelationshipDto,
   ) {
     //: Promise<ItemAncestry>
     return await firstValueFrom(
       this.natClient.send('item.createItemAncestry', {
         userId: req.user.id,
+        orgId: orgId,
+        projectId: projectId,
+        itemId: relationship.ancestorItemId,
         ancestorItemId: relationship.ancestorItemId,
         descendantItemId: relationship.descendantItemId,
       }),
@@ -132,11 +154,15 @@ export class ItemController {
   @Delete('relationship/:itemAncestryId')
   async deleteItemAncestry(
     @Req() req: AuthenticatedRequest,
+    @Param('orgId') orgId: string,
+    @Param('projectId') projectId: string,
     @Param('itemAncestryId') itemAncestryId: string,
   ): Promise<undefined> {
     return await firstValueFrom(
       this.natClient.send('item.deleteItemAncestry', {
         userId: req.user.id,
+        orgId: orgId,
+        projectId: projectId,
         itemAncestryId: itemAncestryId,
       }),
     );
