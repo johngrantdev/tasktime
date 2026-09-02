@@ -5,48 +5,48 @@ export class Migration20260902022844 extends Migration {
 
   override up(): void | Promise<void> {
     this.addSql(
-      `create table "org" ("id" uuid not null default uuid_generate_v4(), "created_at" timestamptz not null, "updated_at" timestamptz not null, "name" varchar(255) not null, "description" varchar(255) not null default '', "disabled" boolean not null default false, primary key ("id"));`,
+      `create table "org" ("id" uuid not null default gen_random_uuid(), "created_at" timestamptz not null, "updated_at" timestamptz not null, "name" varchar(255) not null, "description" varchar(255) not null default '', "disabled" boolean not null default false, primary key ("id"));`,
     );
 
     this.addSql(
-      `create table "user" ("id" uuid not null default uuid_generate_v4(), "created_at" timestamptz not null, "updated_at" timestamptz not null, "email" varchar(255) not null, "first_name" varchar(255) not null default '', "last_name" varchar(255) not null default '', "avatar" varchar(255) not null default '', "last_login_at" timestamptz not null, "disabled" boolean not null default false, "revocation_timestamp" timestamptz not null, primary key ("id"));`,
+      `create table "user" ("id" uuid not null default gen_random_uuid(), "created_at" timestamptz not null, "updated_at" timestamptz not null, "email" varchar(255) not null, "first_name" varchar(255) not null default '', "last_name" varchar(255) not null default '', "avatar" varchar(255) not null default '', "last_login_at" timestamptz not null, "disabled" boolean not null default false, "revocation_timestamp" timestamptz not null, primary key ("id"));`,
     );
 
     this.addSql(
-      `create table "project" ("id" uuid not null default uuid_generate_v4(), "created_at" timestamptz not null, "updated_at" timestamptz not null, "org_id" uuid not null, "name" varchar(255) not null, "creator_id" uuid not null, "description" varchar(255) not null default '', "time_allocated" int not null default 0, "is_complete" boolean not null default false, "is_hidden" boolean not null default false, primary key ("id"));`,
+      `create table "project" ("id" uuid not null default gen_random_uuid(), "created_at" timestamptz not null, "updated_at" timestamptz not null, "org_id" uuid not null, "name" varchar(255) not null, "creator_id" uuid not null, "description" varchar(255) not null default '', "time_allocated" int not null default 0, "is_complete" boolean not null default false, "is_hidden" boolean not null default false, primary key ("id"));`,
     );
 
     this.addSql(
-      `create table "project_member" ("id" uuid not null default uuid_generate_v4(), "project_id" uuid not null, "member_id" uuid not null, "role" text not null, primary key ("id"));`,
+      `create table "project_member" ("id" uuid not null default gen_random_uuid(), "project_id" uuid not null, "member_id" uuid not null, "role" text not null, primary key ("id"));`,
     );
     this.addSql(
       `alter table "project_member" add constraint "project_member_role_check" check ("role" in ('projectAdmin', 'projectMember', 'projectViewer'));`,
     );
 
     this.addSql(
-      `create table "org_member" ("id" uuid not null default uuid_generate_v4(), "org_id" uuid not null, "member_id" uuid not null, "role" text not null, primary key ("id"));`,
+      `create table "org_member" ("id" uuid not null default gen_random_uuid(), "org_id" uuid not null, "member_id" uuid not null, "role" text not null, primary key ("id"));`,
     );
     this.addSql(
       `alter table "org_member" add constraint "org_member_role_check" check ("role" in ('orgAdmin', 'orgProjectManager', 'orgMember'));`,
     );
 
     this.addSql(
-      `create table "notification" ("id" uuid not null default uuid_generate_v4(), "created_at" timestamptz not null, "updated_at" timestamptz not null, "user_id" uuid not null, "read" boolean not null default false, "title" varchar(255) not null, "data" varchar(255) not null, primary key ("id"));`,
+      `create table "notification" ("id" uuid not null default gen_random_uuid(), "created_at" timestamptz not null, "updated_at" timestamptz not null, "user_id" uuid not null, "read" boolean not null default false, "title" varchar(255) not null, "data" varchar(255) not null, primary key ("id"));`,
     );
 
     this.addSql(
-      `create table "item" ("id" uuid not null default uuid_generate_v4(), "created_at" timestamptz not null, "updated_at" timestamptz not null, "project_id" uuid not null, "host_item_id" uuid null, "name" varchar(255) not null, "creator_id" uuid not null, "description" varchar(255) not null default '', "time_allocated" int not null default 0, "time_spent" int not null default 0, "is_complete" boolean not null default false, "req_review" boolean not null default false, "colour" varchar(255) not null default '', primary key ("id"));`,
+      `create table "item" ("id" uuid not null default gen_random_uuid(), "created_at" timestamptz not null, "updated_at" timestamptz not null, "project_id" uuid not null, "host_item_id" uuid null, "name" varchar(255) not null, "creator_id" uuid not null, "description" varchar(255) not null default '', "time_allocated" int not null default 0, "time_spent" int not null default 0, "is_complete" boolean not null default false, "req_review" boolean not null default false, "colour" varchar(255) not null default '', primary key ("id"));`,
     );
 
     this.addSql(
-      `create table "item_member" ("id" uuid not null default uuid_generate_v4(), "item_id" uuid not null, "member_id" uuid not null, "role" text not null, primary key ("id"));`,
+      `create table "item_member" ("id" uuid not null default gen_random_uuid(), "item_id" uuid not null, "member_id" uuid not null, "role" text not null, primary key ("id"));`,
     );
     this.addSql(
       `alter table "item_member" add constraint "item_member_role_check" check ("role" in ('itemOwner', 'itemMember', 'itemReviewer', 'itemViewer'));`,
     );
 
     this.addSql(
-      `create table "item_ancestry" ("id" uuid not null default uuid_generate_v4(), "created_at" timestamptz not null, "updated_at" timestamptz not null, "ancestor_id" uuid not null, "descendant_id" uuid not null, primary key ("id"));`,
+      `create table "item_ancestry" ("id" uuid not null default gen_random_uuid(), "created_at" timestamptz not null, "updated_at" timestamptz not null, "ancestor_id" uuid not null, "descendant_id" uuid not null, primary key ("id"));`,
     );
 
     this.addSql(
