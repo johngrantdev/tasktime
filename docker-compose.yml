@@ -4,7 +4,7 @@
 
 services:
   dev-nats:
-    image: nats:latest
+    image: docker.io/library/nats:2
     container_name: dev-nats
     ports:
       - "8222:8222" # Monitoring port
@@ -15,7 +15,7 @@ services:
       - dev_network
 
   dev-postgres:
-    image: postgres:latest
+    image: docker.io/library/postgres:17
     container_name: dev-postgres
     ports:
       - "5432:5432"
@@ -25,7 +25,7 @@ services:
       POSTGRES_PASSWORD: $DB_PASS
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./postgres/init:/docker-entrypoint-initdb.d
+      - ./postgres/init:/docker-entrypoint-initdb.d:z
     networks:
       - dev_network
 

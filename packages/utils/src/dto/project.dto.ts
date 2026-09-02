@@ -69,18 +69,6 @@ export class GetProjectDto {
   projectId = '';
 }
 
-export class CreateProjectDto {
-  @IsUUID()
-  userId = '';
-
-  @IsUUID()
-  orgId = '';
-
-  @ValidateNested()
-  @Type(() => NewProjectDto)
-  newProject!: NewProjectDto;
-}
-
 export class NewProjectDto {
   @IsString()
   @IsNotEmpty()
@@ -95,16 +83,16 @@ export class NewProjectDto {
   description?: string;
 }
 
-export class UpdateProjectDto {
+export class CreateProjectDto {
   @IsUUID()
   userId = '';
 
   @IsUUID()
-  projectId = '';
+  orgId = '';
 
   @ValidateNested()
-  @Type(() => ProjectChangesDto)
-  projectChanges!: ProjectChangesDto;
+  @Type(() => NewProjectDto)
+  newProject!: NewProjectDto;
 }
 
 export class ProjectChangesDto {
@@ -130,6 +118,18 @@ export class ProjectChangesDto {
   @IsBoolean()
   @IsNotEmpty()
   isHidden = false;
+}
+
+export class UpdateProjectDto {
+  @IsUUID()
+  userId = '';
+
+  @IsUUID()
+  projectId = '';
+
+  @ValidateNested()
+  @Type(() => ProjectChangesDto)
+  projectChanges!: ProjectChangesDto;
 }
 
 export class DeleteProjectDto {

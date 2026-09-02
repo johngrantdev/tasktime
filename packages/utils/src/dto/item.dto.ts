@@ -80,18 +80,6 @@ export class GetItemDto {
   itemId = '';
 }
 
-export class CreateItemDto {
-  @IsUUID()
-  userId = '';
-
-  @IsUUID()
-  projectId = '';
-
-  @ValidateNested()
-  @Type(() => NewItemDto)
-  newItem!: NewItemDto;
-}
-
 export class NewItemDto {
   @IsString()
   @IsNotEmpty()
@@ -118,16 +106,16 @@ export class NewItemDto {
   hostItem?: string;
 }
 
-export class UpdateItemDto {
+export class CreateItemDto {
   @IsUUID()
   userId = '';
 
   @IsUUID()
-  itemId = '';
+  projectId = '';
 
   @ValidateNested()
-  @Type(() => ItemChangesDto)
-  itemChanges!: ItemChangesDto;
+  @Type(() => NewItemDto)
+  newItem!: NewItemDto;
 }
 
 export class ItemChangesDto {
@@ -166,6 +154,18 @@ export class ItemChangesDto {
   @IsOptional()
   @IsUUID()
   hostItem?: string;
+}
+
+export class UpdateItemDto {
+  @IsUUID()
+  userId = '';
+
+  @IsUUID()
+  itemId = '';
+
+  @ValidateNested()
+  @Type(() => ItemChangesDto)
+  itemChanges!: ItemChangesDto;
 }
 
 export class DeleteItemDto {
