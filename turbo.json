@@ -13,6 +13,9 @@
       "dependsOn": ["dev-utils"],
       "cache": false,
       "persistent": true
+    },
+    "typecheck": {
+      "dependsOn": ["^build"]
     }
   }
 }
