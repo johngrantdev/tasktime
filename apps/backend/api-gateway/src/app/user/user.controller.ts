@@ -1,10 +1,9 @@
 import { Body, Controller, Get, Inject, Patch, Req } from '@nestjs/common';
-import { UpdateUserDto } from './dto/updateUser.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { UserDto } from 'tasktime-utils';
+import { UserDto, UserUpdatesDto } from 'tasktime-utils';
 import { ClientProxy } from '@nestjs/microservices';
 import { firstValueFrom } from 'rxjs';
-import { AuthenticatedRequest } from '../shared/interfaces/authenticatedRequest';
+import type { AuthenticatedRequest } from '../shared/interfaces/authenticatedRequest';
 
 // This endpoint is used for own user profile
 // Other users can be accessed through the 'org/:orgId/members/' endpoint
@@ -18,19 +17,19 @@ export class UserController {
   @Get()
   async getProfile(@Req() req: AuthenticatedRequest): Promise<UserDto> {
     return await firstValueFrom(
-      this.natClient.send('entity.getUser', { userId: req.user.id }),
+      this.natClient.send('user.getUser', { userId: req.user.id }),
     );
   }
 
   @Patch()
   async updateUser(
     @Req() req: AuthenticatedRequest,
-    @Body() updates: UpdateUserDto,
+    @Body() updates: UserUpdatesDto,
   ): Promise<UserDto> {
     return await firstValueFrom(
-      this.natClient.send('entity.updateUser', {
+      this.natClient.send('user.update', {
         userId: req.user.id,
-        updates: updates,
+        userUpdates: updates,
       }),
     );
   }
@@ -38,9 +37,9 @@ export class UserController {
   @Patch('disable')
   async disableUser(@Req() req: AuthenticatedRequest) {
     return await firstValueFrom(
-      this.natClient.send('entity.updateUser', {
+      this.natClient.send('user.update', {
         userId: req.user.id,
-        updates: { disabled: true },
+        userUpdates: { disabled: true },
       }),
     );
   }
@@ -48,9 +47,9 @@ export class UserController {
   @Patch('enable')
   async enableUser(@Req() req: AuthenticatedRequest) {
     return await firstValueFrom(
-      this.natClient.send('entity.updateUser', {
+      this.natClient.send('user.update', {
         userId: req.user.id,
-        updates: { disabled: false },
+        userUpdates: { disabled: false },
       }),
     );
   }

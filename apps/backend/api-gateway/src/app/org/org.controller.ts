@@ -16,7 +16,7 @@ import { API_PREFIX } from '../shared/config';
 import { ClientProxy } from '@nestjs/microservices';
 import { firstValueFrom } from 'rxjs';
 import { AllOrgsDto, OrgDto } from 'tasktime-utils';
-import { AuthenticatedRequest } from '../shared/interfaces/authenticatedRequest';
+import type { AuthenticatedRequest } from '../shared/interfaces/authenticatedRequest';
 
 @Controller(`${API_PREFIX}/org`)
 @ApiTags('org')
@@ -106,7 +106,7 @@ export class OrgController {
     @Param('orgId') orgId: string,
   ) {
     return await firstValueFrom(
-      this.natClient.send('org.acceptOrgInvite', {
+      this.natClient.send('org.acceptInvite', {
         userId: req.user.id,
         orgId: orgId,
       }),
@@ -120,7 +120,7 @@ export class OrgController {
     @Param('memberId') memberId: string,
   ) {
     return await firstValueFrom(
-      this.natClient.send('org.getOrgMember', {
+      this.natClient.send('org.getMember', {
         userId: req.user.id,
         memberId: memberId,
         orgId: orgId,
@@ -135,7 +135,7 @@ export class OrgController {
     @Param('memberId') memberId: string,
   ) {
     return await firstValueFrom(
-      this.natClient.send('org.removeOrgMember', {
+      this.natClient.send('org.removeMember', {
         userId: req.user.id,
         memberId: memberId,
         orgId: orgId,
