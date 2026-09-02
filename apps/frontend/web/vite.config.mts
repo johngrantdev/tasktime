@@ -5,6 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://vitejs.dev/config https://vitest.dev/config
 export default defineConfig({
+  envDir: '../../../',
   plugins: [react(), tailwindcss()],
   resolve: { tsconfigPaths: true },
   test: {
