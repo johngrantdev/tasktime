@@ -10,17 +10,17 @@ describe('NotificationService', () => {
   let service: NotificationService;
 
   const mockEventEmitter = {
-    emit: jest.fn(),
+    emit: vi.fn(),
   };
 
   const mockEntityManager = {
-    persistAndFlush: jest.fn(),
-    getReference: jest.fn(),
+    persistAndFlush: vi.fn(),
+    getReference: vi.fn(),
   };
 
   const mockNotificationRepository = {
-    findOne: jest.fn(),
-    assign: jest.fn(),
+    findOne: vi.fn(),
+    assign: vi.fn(),
   };
 
   beforeEach(async () => {

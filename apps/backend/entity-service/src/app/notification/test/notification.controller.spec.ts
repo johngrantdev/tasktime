@@ -6,13 +6,13 @@ describe('NotificationController', () => {
   let controller: NotificationController;
 
   const mockNotificationService = {
-    getAllNotifications: jest.fn(),
-    getNotification: jest.fn(),
-    createNotification: jest.fn(),
-    updateUnread: jest.fn(),
-    deleteNotification: jest.fn(),
-    removeMember: jest.fn(),
-    removeProject: jest.fn(),
+    getAllNotifications: vi.fn(),
+    getNotification: vi.fn(),
+    createNotification: vi.fn(),
+    updateUnread: vi.fn(),
+    deleteNotification: vi.fn(),
+    removeMember: vi.fn(),
+    removeProject: vi.fn(),
   };
 
   beforeEach(async () => {
