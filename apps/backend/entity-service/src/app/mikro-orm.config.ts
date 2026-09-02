@@ -1,3 +1,4 @@
+import { Migrator } from '@mikro-orm/migrations';
 import { defineConfig } from '@mikro-orm/postgresql';
 
 import { Item } from './item/entities/item.entity';
@@ -12,6 +13,8 @@ import { Notification } from './notification/entities/notification.entity';
 import { ItemAncestry } from './item/entities/itemAncestry.entity';
 
 export default defineConfig({
+  extensions: [Migrator],
+  migrations: { path: './migrations', pathTs: './src/migrations' },
   entities: [
     CustomBaseEntity,
     User,
