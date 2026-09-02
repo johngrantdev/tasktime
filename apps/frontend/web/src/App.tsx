@@ -1,5 +1,6 @@
 import { Suspense, useEffect, useState } from 'react';
 import {
+  Navigate,
   Route,
   RouterProvider,
   createBrowserRouter,
@@ -11,6 +12,7 @@ import NotFound from './pages/notFound';
 import Home from './pages/home';
 import Features from './pages/features';
 import Docs from './pages/docs';
+import Projects from './pages/app/projects';
 import { loginCheck } from './services/loginCheck';
 import { toast } from './components/ui/use-toast';
 
@@ -52,51 +54,79 @@ function App() {
 
   if (!routesReady) return null;
 
-  const mainRoutes = (
-    <Route
-      path="/"
-      element={
-        <Layout
-          userLoggedIn={userLoggedIn}
-          setUserLoggedIn={setUserLoggedIn}
-          redirect={redirect}
-        />
-      }
-    >
-      <Route
-        path="/*"
-        element={<NotFound />}
-        handle={{ title: 'Not Found', mainNav: false }}
-      />
-      <Route
-        index
-        element={<Home />}
-        handle={{ title: 'Home', mainNav: false }}
-      />
-      <Route
-        path="/features"
-        element={
-          <Suspense fallback={<div>Loading...</div>}>
-            <Features />
-          </Suspense>
-        }
-        handle={{ title: 'Features', mainNav: true }}
-      />
-      <Route
-        path="/docs"
-        element={
-          <Suspense fallback={<div>Loading...</div>}>
-            <Docs />
-          </Suspense>
-        }
-        handle={{ title: 'Documentation', mainNav: true }}
-      />
-    </Route>
-  );
+  const mainRoutes = createMainRoutes({
+    userLoggedIn,
+    setUserLoggedIn,
+    redirect,
+  });
 
   const router = createBrowserRouter(createRoutesFromElements(mainRoutes));
 
   return <RouterProvider router={router} />;
 }
+
+type MainRoutesProps = {
+  userLoggedIn: boolean;
+  setUserLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+  redirect: string;
+};
+
+// exported so the route tree can be mounted in a test without App's
+// page-load effects
+export const createMainRoutes = ({
+  userLoggedIn,
+  setUserLoggedIn,
+  redirect,
+}: MainRoutesProps) => (
+  <Route
+    path="/"
+    element={
+      <Layout
+        userLoggedIn={userLoggedIn}
+        setUserLoggedIn={setUserLoggedIn}
+        redirect={redirect}
+      />
+    }
+  >
+    <Route
+      path="/*"
+      element={<NotFound />}
+      handle={{ title: 'Not Found', mainNav: false }}
+    />
+    <Route
+      index
+      element={<Home />}
+      handle={{ title: 'Home', mainNav: false }}
+    />
+    <Route
+      path="/features"
+      element={
+        <Suspense fallback={<div>Loading...</div>}>
+          <Features />
+        </Suspense>
+      }
+      handle={{ title: 'Features', mainNav: true }}
+    />
+    <Route
+      path="/docs"
+      element={
+        <Suspense fallback={<div>Loading...</div>}>
+          <Docs />
+        </Suspense>
+      }
+      handle={{ title: 'Documentation', mainNav: true }}
+    />
+    <Route
+      path="/app"
+      element={<Navigate to="/app/projects" replace />}
+      handle={{ title: 'App', protectedRoute: true, mainNav: false }}
+    />
+    <Route
+      path="/app/projects"
+      element={<Projects />}
+      handle={{ title: 'Projects', protectedRoute: true, mainNav: false }}
+    />
+  </Route>
+);
 
 export default App;
