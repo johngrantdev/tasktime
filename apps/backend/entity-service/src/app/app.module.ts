@@ -7,6 +7,7 @@ import { AbilitiesGuard } from './shared/guards/abilities.guard';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
 import mikroOrmConfig from './mikro-orm.config';
 import { ItemModule } from './item/item.module';
+import { NotificationModule } from './notification/notification.module';
 import { OrgModule } from './org/org.module';
 import { ProjectModule } from './project/project.module';
 import { UserModule } from './user/user.module';
@@ -15,6 +16,7 @@ import { UserModule } from './user/user.module';
   imports: [
     AbilityModule,
     ItemModule,
+    NotificationModule,
     OrgModule,
     ProjectModule,
     UserModule,
