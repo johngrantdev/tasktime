@@ -3,6 +3,11 @@ import { ApiTags } from '@nestjs/swagger';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { OrgMemberService } from './orgMember.service';
 import { GetOrgMemberDto, RemoveOrgMemberDto } from 'tasktime-utils';
+import { CheckAbilities } from '../../shared/decorators/abilities.decorator';
+import {
+  ManageOrgAbility,
+  ViewOrgAbility,
+} from '../../ability/ability.objects';
 
 @Controller()
 @ApiTags('org')
@@ -17,11 +22,13 @@ export class OrgMemberController {
   // }
 
   @MessagePattern('org.getMember')
+  @CheckAbilities(new ViewOrgAbility())
   async getMember(@Payload() data: GetOrgMemberDto) {
     return await this.orgMemberService.getOrgMember(data.memberId, data.orgId);
   }
 
   @MessagePattern('org.removeMember')
+  @CheckAbilities(new ManageOrgAbility())
   async removeMember(@Payload() data: RemoveOrgMemberDto) {
     await this.orgMemberService.removeOrgMember(
       data.userId,

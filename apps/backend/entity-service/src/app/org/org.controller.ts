@@ -2,6 +2,7 @@ import { Controller } from '@nestjs/common';
 import { OrgService } from './org.service';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CheckAbilities } from '../shared/decorators/abilities.decorator';
+import { SkipAuth } from '../shared/decorators/skipAuth.decorator';
 import {
   CreateOrgAbility,
   ViewOrgAbility,
@@ -24,11 +25,11 @@ import {
 export class OrgController {
   constructor(private readonly orgService: OrgService) {}
 
-  // does not require guard as it contains logs to find the orgs that the
-  // user is a member of.
+  // Returns only the orgs the caller is a member of, so there is no
+  // resource to check an ability against.
   @MessagePattern('org.getAllOrgs')
+  @SkipAuth()
   async getAllOrgs(@Payload() data: GetAllOrgsDto): Promise<AllOrgsDto> {
-    console.log(data.userId);
     const orgs = await this.orgService.getAllOrgs(data.userId);
     return { orgs: orgs };
   }

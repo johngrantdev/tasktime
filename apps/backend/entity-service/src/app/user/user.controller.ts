@@ -25,17 +25,22 @@ export class UserController {
     return this.userService.getOrCreateUserByEmail(data.email);
   }
 
+  // The gateway fills userId from the verified JWT, so these only ever
+  // reach the caller's own row.
   @MessagePattern('user.getUser')
+  @SkipAuth()
   async getUser(@Payload() data: GetUserDto): Promise<UserDto> {
     return this.userService.getUser(data.userId);
   }
 
   @MessagePattern('user.update')
+  @SkipAuth()
   async updateUser(@Payload() data: UpdateUserDto): Promise<UserDto> {
     return this.userService.updateUser(data.userId, data.userUpdates);
   }
 
   @MessagePattern('user.revokeAllTokenValidity')
+  @SkipAuth()
   handleRevokeAllTokenValidity(@Payload() payload: RevokeTokenDto) {
     this.userService.handleRevokeAllTokenValidity(payload.userId);
   }
