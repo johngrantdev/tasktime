@@ -26,10 +26,11 @@ export class OrgMemberService {
   }
 
   async createOrgMember(userId: string, orgId: string, role: OrgMemberRole) {
-    const userRef = this.em.getReference(User, userId);
-    const orgRef = this.em.getReference(Org, orgId);
+    const localEm = this.em.fork();
+    const userRef = localEm.getReference(User, userId);
+    const orgRef = localEm.getReference(Org, orgId);
     const orgMember = new OrgMember(userRef, orgRef, role);
-    await this.em.persist(orgMember).flush();
+    await localEm.persist(orgMember).flush();
   }
 
   async removeOrgMember(
