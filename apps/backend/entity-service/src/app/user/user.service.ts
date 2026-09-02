@@ -42,7 +42,7 @@ export class UserService {
   async createUser(email: string): Promise<UserDto> {
     const localEm = this.em.fork();
     const user = new User(email);
-    await localEm.persistAndFlush(user);
+    await localEm.persist(user).flush();
     return userToDto(user);
   }
 
@@ -53,7 +53,7 @@ export class UserService {
       throw new NotFoundException(USER_NOT_FOUND);
     }
     localEm.assign(user, updates);
-    await localEm.persistAndFlush(user);
+    await localEm.persist(user).flush();
     return userToDto(user);
   }
 
@@ -65,7 +65,7 @@ export class UserService {
     }
     // reset the revocation timestamp to now.
     localEm.assign(user, { revocationTimestamp: new Date() });
-    await localEm.persistAndFlush(user);
+    await localEm.persist(user).flush();
   }
 
   // async handleInvitedOrgMember(

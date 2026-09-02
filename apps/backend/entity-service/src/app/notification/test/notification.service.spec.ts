@@ -14,7 +14,8 @@ describe('NotificationService', () => {
   };
 
   const mockEntityManager = {
-    persistAndFlush: vi.fn(),
+    persist: vi.fn().mockReturnThis(),
+    flush: vi.fn(),
     getReference: vi.fn(),
   };
 

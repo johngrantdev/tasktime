@@ -14,6 +14,7 @@ export function itemToDto(item: Item): ItemDto {
     timeAllocated: item.timeAllocated,
     timeSpent: item.timeSpent,
     isComplete: item.isComplete,
+    reqReview: item.reqReview,
     colour: item.colour,
   });
   return dto;

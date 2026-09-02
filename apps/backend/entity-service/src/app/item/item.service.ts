@@ -46,10 +46,10 @@ export class ItemService {
     const userRef = this.em.getReference(User, data.userId);
     const projectRef = this.em.getReference(Project, data.projectId);
     const item = new Item(userRef, projectRef, data.newItem.name);
-    await this.em.persistAndFlush(item);
+    await this.em.persist(item).flush();
     const itemRef = this.em.getReference(Item, item.id);
     const itemMember = new ItemMember(userRef, itemRef, ItemMemberRole.Owner);
-    await this.em.persistAndFlush(itemMember);
+    await this.em.persist(itemMember).flush();
     this.eventEmitter.emit(
       'item.created',
       new ItemCreatedEvent(
@@ -68,7 +68,7 @@ export class ItemService {
       throw new Error(`${data.itemId} not found.`);
     }
     this.itemRepository.assign(item, data.itemChanges);
-    await this.em.persistAndFlush(item);
+    await this.em.persist(item).flush();
     return itemToDto(item);
   }
 
@@ -76,12 +76,12 @@ export class ItemService {
     const itemMembers = await this.itemRepository.findMembersByItemId(
       data.itemId,
     );
-    await this.em.removeAndFlush(itemMembers);
+    await this.em.remove(itemMembers).flush();
     const item = await this.itemRepository.findOne(data.itemId);
     if (!item) {
       throw new Error(`Item with ID ${data.itemId} not found`);
     }
-    await this.em.removeAndFlush(item);
+    await this.em.remove(item).flush();
 
     // this.eventEmitter.emit(
     //   'item.deleted',

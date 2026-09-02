@@ -16,18 +16,21 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "migration:create": "pnpm build && mikro-orm migration:create",
+    "migration:up": "pnpm build && mikro-orm migration:up"
   },
   "dependencies": {
     "@casl/ability": "^6.7.1",
-    "@mikro-orm/core": "^6.1.12",
-    "@mikro-orm/nestjs": "^5.2.3",
-    "@mikro-orm/postgresql": "^6.1.12",
+    "@mikro-orm/core": "^7.1.14",
+    "@mikro-orm/decorators": "^7.1.14",
+    "@mikro-orm/nestjs": "^7.1.0",
+    "@mikro-orm/postgresql": "^7.1.14",
     "tasktime-utils": "workspace:*"
   },
   "devDependencies": {
-    "@mikro-orm/cli": "^6.6.16",
-    "@mikro-orm/migrations": "^6.6.16"
+    "@mikro-orm/cli": "^7.1.14",
+    "@mikro-orm/migrations": "^7.1.14"
   },
   "jest": {
     "moduleFileExtensions": [
@@ -48,9 +51,7 @@
   },
   "mikro-orm": {
     "configPaths": [
-      "./src/app/mikro-orm.config.ts",
       "./dist/app/mikro-orm.config.js"
-    ],
-    "useTsNode": true
+    ]
   }
 }

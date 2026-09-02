@@ -54,7 +54,7 @@ export class NotificationService {
     notification.user = this.em.getReference(User, notificationData.user);
     notification.title = notificationData.title;
     notification.data = notificationData.data;
-    this.em.persistAndFlush(notification);
+    this.em.persist(notification).flush();
     return notification;
   }
 
@@ -68,7 +68,7 @@ export class NotificationService {
       throw new Error(`${notificationId} not found.`);
     }
     notification.read = newRead;
-    this.em.persistAndFlush(notification);
+    this.em.persist(notification).flush();
     return notification;
   }
 
@@ -80,7 +80,7 @@ export class NotificationService {
     if (!notification) {
       throw new NotFoundException(this.notFoundError);
     }
-    await this.em.removeAndFlush(notification);
+    await this.em.remove(notification).flush();
   }
 
   // move to orgService/

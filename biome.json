@@ -10,7 +10,8 @@
       "**",
       "!**/dist",
       "!**/node_modules",
-      "!**/globals.css"
+      "!**/globals.css",
+      "!**/.snapshot-*.json"
     ]
   },
   "formatter": {

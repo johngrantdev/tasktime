@@ -19,6 +19,9 @@ export default defineConfig({
     ],
   },
   resolve: {
-    alias: { 'tasktime-utils': new URL('./packages/utils/src', import.meta.url).pathname },
+    alias: {
+      'tasktime-utils': new URL('./packages/utils/src', import.meta.url)
+        .pathname,
+    },
   },
 });

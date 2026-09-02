@@ -1,4 +1,5 @@
-import { Entity, EntityRepositoryType, ManyToOne } from '@mikro-orm/core';
+import { Entity, ManyToOne } from '@mikro-orm/decorators/legacy';
+import { EntityRepositoryType } from '@mikro-orm/core';
 import { Item } from './item.entity';
 import { CustomBaseEntity } from '../../shared/entities/customBase.entity';
 import { ItemAncestryRepository } from '../repositories/itemAncestry.repository';

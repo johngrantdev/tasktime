@@ -1,11 +1,10 @@
 import {
-  Collection,
   Entity,
-  EntityRepositoryType,
   ManyToOne,
   OneToMany,
   Property,
-} from '@mikro-orm/core';
+} from '@mikro-orm/decorators/legacy';
+import { Collection, EntityRepositoryType } from '@mikro-orm/core';
 import { Project } from '../../project/entities/project.entity';
 import { User } from '../../user/entities/user.entity';
 import { CustomBaseEntity } from '../../shared/entities/customBase.entity';
@@ -51,6 +50,9 @@ export class Item extends CustomBaseEntity {
 
   @Property({ type: 'boolean' })
   isComplete = false;
+
+  @Property({ type: 'boolean' })
+  reqReview = false;
 
   @Property()
   colour = '';

@@ -1,4 +1,5 @@
 import { Migrator } from '@mikro-orm/migrations';
+import { ReflectMetadataProvider } from '@mikro-orm/decorators/legacy';
 import { defineConfig } from '@mikro-orm/postgresql';
 
 import { Item } from './item/entities/item.entity';
@@ -14,6 +15,7 @@ import { ItemAncestry } from './item/entities/itemAncestry.entity';
 
 export default defineConfig({
   extensions: [Migrator],
+  metadataProvider: ReflectMetadataProvider,
   migrations: { path: './migrations', pathTs: './src/migrations' },
   entities: [
     CustomBaseEntity,

@@ -1,9 +1,5 @@
-import {
-  Entity,
-  EntityRepositoryType,
-  ManyToOne,
-  Property,
-} from '@mikro-orm/core';
+import { Entity, ManyToOne, Property } from '@mikro-orm/decorators/legacy';
+import { EntityRepositoryType } from '@mikro-orm/core';
 import { Org } from '../../org/entities/org.entity';
 import { User } from '../../user/entities/user.entity';
 import { ProjectRepository } from '../repositories/project.repository';

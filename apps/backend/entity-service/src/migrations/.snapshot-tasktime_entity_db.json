@@ -1,26 +1,29 @@
 {
+  "name": "public",
   "namespaces": [
     "public"
   ],
-  "name": "public",
   "tables": [
     {
+      "name": "item",
+      "schema": "public",
       "columns": {
-        "id": {
-          "name": "id",
-          "type": "uuid",
+        "colour": {
+          "name": "colour",
+          "type": "varchar(255)",
           "unsigned": false,
           "autoincrement": false,
-          "primary": true,
+          "primary": false,
           "nullable": false,
           "unique": false,
-          "length": null,
+          "length": 255,
           "precision": null,
           "scale": null,
-          "default": "uuid_generate_v4()",
+          "default": "''",
           "comment": null,
+          "collation": null,
           "enumItems": [],
-          "mappedType": "uuid"
+          "mappedType": "string"
         },
         "created_at": {
           "name": "created_at",
@@ -35,72 +38,9 @@
           "scale": null,
           "default": null,
           "comment": null,
+          "collation": null,
           "enumItems": [],
           "mappedType": "datetime"
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamptz(6)",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "unique": false,
-          "length": 6,
-          "precision": null,
-          "scale": null,
-          "default": null,
-          "comment": null,
-          "enumItems": [],
-          "mappedType": "datetime"
-        },
-        "project_id": {
-          "name": "project_id",
-          "type": "uuid",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "unique": false,
-          "length": null,
-          "precision": null,
-          "scale": null,
-          "default": null,
-          "comment": null,
-          "enumItems": [],
-          "mappedType": "uuid"
-        },
-        "host_item_id": {
-          "name": "host_item_id",
-          "type": "uuid",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": true,
-          "unique": false,
-          "length": null,
-          "precision": null,
-          "scale": null,
-          "default": null,
-          "comment": null,
-          "enumItems": [],
-          "mappedType": "uuid"
-        },
-        "name": {
-          "name": "name",
-          "type": "varchar(255)",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "unique": false,
-          "length": 255,
-          "precision": null,
-          "scale": null,
-          "default": null,
-          "comment": null,
-          "enumItems": [],
-          "mappedType": "string"
         },
         "creator_id": {
           "name": "creator_id",
@@ -115,6 +55,7 @@
           "scale": null,
           "default": null,
           "comment": null,
+          "collation": null,
           "enumItems": [],
           "mappedType": "uuid"
         },
@@ -131,135 +72,27 @@
           "scale": null,
           "default": "''",
           "comment": null,
+          "collation": null,
           "enumItems": [],
           "mappedType": "string"
         },
-        "time_allocated": {
-          "name": "time_allocated",
-          "type": "int4",
+        "host_item_id": {
+          "name": "host_item_id",
+          "type": "uuid",
           "unsigned": false,
           "autoincrement": false,
           "primary": false,
-          "nullable": false,
-          "unique": false,
-          "length": null,
-          "precision": 32,
-          "scale": 0,
-          "default": "0",
-          "comment": null,
-          "enumItems": [],
-          "mappedType": "integer"
-        },
-        "time_spent": {
-          "name": "time_spent",
-          "type": "int4",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "unique": false,
-          "length": null,
-          "precision": 32,
-          "scale": 0,
-          "default": "0",
-          "comment": null,
-          "enumItems": [],
-          "mappedType": "integer"
-        },
-        "is_complete": {
-          "name": "is_complete",
-          "type": "bool",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
+          "nullable": true,
           "unique": false,
           "length": null,
           "precision": null,
           "scale": null,
-          "default": "false",
+          "default": null,
           "comment": null,
+          "collation": null,
           "enumItems": [],
-          "mappedType": "boolean"
+          "mappedType": "uuid"
         },
-        "colour": {
-          "name": "colour",
-          "type": "varchar(255)",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "unique": false,
-          "length": 255,
-          "precision": null,
-          "scale": null,
-          "default": "''",
-          "comment": null,
-          "enumItems": [],
-          "mappedType": "string"
-        }
-      },
-      "name": "item",
-      "schema": "public",
-      "indexes": [
-        {
-          "columnNames": [
-            "id"
-          ],
-          "composite": false,
-          "constraint": false,
-          "keyName": "item_pkey",
-          "unique": true,
-          "primary": true
-        }
-      ],
-      "checks": [],
-      "foreignKeys": {
-        "item_creator_id_foreign": {
-          "columnNames": [
-            "creator_id"
-          ],
-          "constraintName": "item_creator_id_foreign",
-          "localTableName": "public.item",
-          "referencedTableName": "public.user",
-          "referencedColumnNames": [
-            "id"
-          ],
-          "updateRule": "cascade",
-          "deleteRule": "no action"
-        },
-        "item_host_item_id_foreign": {
-          "columnNames": [
-            "host_item_id"
-          ],
-          "constraintName": "item_host_item_id_foreign",
-          "localTableName": "public.item",
-          "referencedTableName": "public.item",
-          "referencedColumnNames": [
-            "id"
-          ],
-          "updateRule": "cascade",
-          "deleteRule": "set null"
-        },
-        "item_project_id_foreign": {
-          "columnNames": [
-            "project_id"
-          ],
-          "constraintName": "item_project_id_foreign",
-          "localTableName": "public.item",
-          "referencedTableName": "public.project",
-          "referencedColumnNames": [
-            "id"
-          ],
-          "updateRule": "cascade",
-          "deleteRule": "no action"
-        }
-      },
-      "nativeEnums": {},
-      "comment": null
-    },
-    {
-      "columns": {
         "id": {
           "name": "id",
           "type": "uuid",
@@ -273,6 +106,200 @@
           "scale": null,
           "default": "uuid_generate_v4()",
           "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "uuid"
+        },
+        "is_complete": {
+          "name": "is_complete",
+          "type": "boolean",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": "false",
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "boolean"
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": 255,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "string"
+        },
+        "project_id": {
+          "name": "project_id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "uuid"
+        },
+        "req_review": {
+          "name": "req_review",
+          "type": "boolean",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": "false",
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "boolean"
+        },
+        "time_allocated": {
+          "name": "time_allocated",
+          "type": "int",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": "0",
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "integer"
+        },
+        "time_spent": {
+          "name": "time_spent",
+          "type": "int",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": "0",
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "integer"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamptz(6)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": 6,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "datetime"
+        }
+      },
+      "indexes": [
+        {
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "constraint": true,
+          "keyName": "item_pkey",
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "triggers": [],
+      "foreignKeys": {
+        "item_creator_id_foreign": {
+          "columnNames": [
+            "creator_id"
+          ],
+          "constraintName": "item_creator_id_foreign",
+          "localTableName": "public.item",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "public.user"
+        },
+        "item_host_item_id_foreign": {
+          "columnNames": [
+            "host_item_id"
+          ],
+          "constraintName": "item_host_item_id_foreign",
+          "localTableName": "public.item",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "public.item",
+          "deleteRule": "set null"
+        },
+        "item_project_id_foreign": {
+          "columnNames": [
+            "project_id"
+          ],
+          "constraintName": "item_project_id_foreign",
+          "localTableName": "public.item",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "public.project"
+        }
+      },
+      "comment": null
+    },
+    {
+      "name": "item_ancestry",
+      "schema": "public",
+      "columns": {
+        "ancestor_id": {
+          "name": "ancestor_id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "collation": null,
           "enumItems": [],
           "mappedType": "uuid"
         },
@@ -289,40 +316,9 @@
           "scale": null,
           "default": null,
           "comment": null,
+          "collation": null,
           "enumItems": [],
           "mappedType": "datetime"
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamptz(6)",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "unique": false,
-          "length": 6,
-          "precision": null,
-          "scale": null,
-          "default": null,
-          "comment": null,
-          "enumItems": [],
-          "mappedType": "datetime"
-        },
-        "ancestor_id": {
-          "name": "ancestor_id",
-          "type": "uuid",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "unique": false,
-          "length": null,
-          "precision": null,
-          "scale": null,
-          "default": null,
-          "comment": null,
-          "enumItems": [],
-          "mappedType": "uuid"
         },
         "descendant_id": {
           "name": "descendant_id",
@@ -337,25 +333,59 @@
           "scale": null,
           "default": null,
           "comment": null,
+          "collation": null,
           "enumItems": [],
           "mappedType": "uuid"
+        },
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": true,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": "uuid_generate_v4()",
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "uuid"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamptz(6)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": 6,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "datetime"
         }
       },
-      "name": "item_ancestry",
-      "schema": "public",
       "indexes": [
         {
           "columnNames": [
             "id"
           ],
           "composite": false,
-          "constraint": false,
+          "constraint": true,
           "keyName": "item_ancestry_pkey",
-          "unique": true,
-          "primary": true
+          "primary": true,
+          "unique": true
         }
       ],
       "checks": [],
+      "triggers": [],
       "foreignKeys": {
         "item_ancestry_ancestor_id_foreign": {
           "columnNames": [
@@ -363,12 +393,10 @@
           ],
           "constraintName": "item_ancestry_ancestor_id_foreign",
           "localTableName": "public.item_ancestry",
-          "referencedTableName": "public.item",
           "referencedColumnNames": [
             "id"
           ],
-          "updateRule": "cascade",
-          "deleteRule": "no action"
+          "referencedTableName": "public.item"
         },
         "item_ancestry_descendant_id_foreign": {
           "columnNames": [
@@ -376,18 +404,17 @@
           ],
           "constraintName": "item_ancestry_descendant_id_foreign",
           "localTableName": "public.item_ancestry",
-          "referencedTableName": "public.item",
           "referencedColumnNames": [
             "id"
           ],
-          "updateRule": "cascade",
-          "deleteRule": "no action"
+          "referencedTableName": "public.item"
         }
       },
-      "nativeEnums": {},
       "comment": null
     },
     {
+      "name": "item_member",
+      "schema": "public",
       "columns": {
         "id": {
           "name": "id",
@@ -402,6 +429,7 @@
           "scale": null,
           "default": "uuid_generate_v4()",
           "comment": null,
+          "collation": null,
           "enumItems": [],
           "mappedType": "uuid"
         },
@@ -418,6 +446,7 @@
           "scale": null,
           "default": null,
           "comment": null,
+          "collation": null,
           "enumItems": [],
           "mappedType": "uuid"
         },
@@ -434,6 +463,7 @@
           "scale": null,
           "default": null,
           "comment": null,
+          "collation": null,
           "enumItems": [],
           "mappedType": "uuid"
         },
@@ -450,6 +480,7 @@
           "scale": null,
           "default": null,
           "comment": null,
+          "collation": null,
           "enumItems": [
             "itemOwner",
             "itemMember",
@@ -459,21 +490,27 @@
           "mappedType": "enum"
         }
       },
-      "name": "item_member",
-      "schema": "public",
       "indexes": [
         {
           "columnNames": [
             "id"
           ],
           "composite": false,
-          "constraint": false,
+          "constraint": true,
           "keyName": "item_member_pkey",
-          "unique": true,
-          "primary": true
+          "primary": true,
+          "unique": true
         }
       ],
-      "checks": [],
+      "checks": [
+        {
+          "name": "item_member_role_check",
+          "expression": "\"role\" in ('itemOwner', 'itemMember', 'itemReviewer', 'itemViewer')",
+          "definition": "check (\"role\" in ('itemOwner', 'itemMember', 'itemReviewer', 'itemViewer'))",
+          "columnName": "role"
+        }
+      ],
+      "triggers": [],
       "foreignKeys": {
         "item_member_item_id_foreign": {
           "columnNames": [
@@ -481,12 +518,10 @@
           ],
           "constraintName": "item_member_item_id_foreign",
           "localTableName": "public.item_member",
-          "referencedTableName": "public.item",
           "referencedColumnNames": [
             "id"
           ],
-          "updateRule": "cascade",
-          "deleteRule": "no action"
+          "referencedTableName": "public.item"
         },
         "item_member_member_id_foreign": {
           "columnNames": [
@@ -494,35 +529,18 @@
           ],
           "constraintName": "item_member_member_id_foreign",
           "localTableName": "public.item_member",
-          "referencedTableName": "public.user",
           "referencedColumnNames": [
             "id"
           ],
-          "updateRule": "cascade",
-          "deleteRule": "no action"
+          "referencedTableName": "public.user"
         }
       },
-      "nativeEnums": {},
       "comment": null
     },
     {
+      "name": "notification",
+      "schema": "public",
       "columns": {
-        "id": {
-          "name": "id",
-          "type": "uuid",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": true,
-          "nullable": false,
-          "unique": false,
-          "length": null,
-          "precision": null,
-          "scale": null,
-          "default": "uuid_generate_v4()",
-          "comment": null,
-          "enumItems": [],
-          "mappedType": "uuid"
-        },
         "created_at": {
           "name": "created_at",
           "type": "timestamptz(6)",
@@ -536,44 +554,47 @@
           "scale": null,
           "default": null,
           "comment": null,
+          "collation": null,
           "enumItems": [],
           "mappedType": "datetime"
         },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamptz(6)",
+        "data": {
+          "name": "data",
+          "type": "varchar(255)",
           "unsigned": false,
           "autoincrement": false,
           "primary": false,
           "nullable": false,
           "unique": false,
-          "length": 6,
+          "length": 255,
           "precision": null,
           "scale": null,
           "default": null,
           "comment": null,
+          "collation": null,
           "enumItems": [],
-          "mappedType": "datetime"
+          "mappedType": "string"
         },
-        "user_id": {
-          "name": "user_id",
+        "id": {
+          "name": "id",
           "type": "uuid",
           "unsigned": false,
           "autoincrement": false,
-          "primary": false,
+          "primary": true,
           "nullable": false,
           "unique": false,
           "length": null,
           "precision": null,
           "scale": null,
-          "default": null,
+          "default": "uuid_generate_v4()",
           "comment": null,
+          "collation": null,
           "enumItems": [],
           "mappedType": "uuid"
         },
         "read": {
           "name": "read",
-          "type": "bool",
+          "type": "boolean",
           "unsigned": false,
           "autoincrement": false,
           "primary": false,
@@ -584,6 +605,7 @@
           "scale": null,
           "default": "false",
           "comment": null,
+          "collation": null,
           "enumItems": [],
           "mappedType": "boolean"
         },
@@ -600,92 +622,9 @@
           "scale": null,
           "default": null,
           "comment": null,
+          "collation": null,
           "enumItems": [],
           "mappedType": "string"
-        },
-        "data": {
-          "name": "data",
-          "type": "varchar(255)",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "unique": false,
-          "length": 255,
-          "precision": null,
-          "scale": null,
-          "default": null,
-          "comment": null,
-          "enumItems": [],
-          "mappedType": "string"
-        }
-      },
-      "name": "notification",
-      "schema": "public",
-      "indexes": [
-        {
-          "columnNames": [
-            "id"
-          ],
-          "composite": false,
-          "constraint": false,
-          "keyName": "notification_pkey",
-          "unique": true,
-          "primary": true
-        }
-      ],
-      "checks": [],
-      "foreignKeys": {
-        "notification_user_id_foreign": {
-          "columnNames": [
-            "user_id"
-          ],
-          "constraintName": "notification_user_id_foreign",
-          "localTableName": "public.notification",
-          "referencedTableName": "public.user",
-          "referencedColumnNames": [
-            "id"
-          ],
-          "updateRule": "cascade",
-          "deleteRule": "no action"
-        }
-      },
-      "nativeEnums": {},
-      "comment": null
-    },
-    {
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "uuid",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": true,
-          "nullable": false,
-          "unique": false,
-          "length": null,
-          "precision": null,
-          "scale": null,
-          "default": "uuid_generate_v4()",
-          "comment": null,
-          "enumItems": [],
-          "mappedType": "uuid"
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamptz(6)",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "unique": false,
-          "length": 6,
-          "precision": null,
-          "scale": null,
-          "default": null,
-          "comment": null,
-          "enumItems": [],
-          "mappedType": "datetime"
         },
         "updated_at": {
           "name": "updated_at",
@@ -700,24 +639,77 @@
           "scale": null,
           "default": null,
           "comment": null,
+          "collation": null,
           "enumItems": [],
           "mappedType": "datetime"
         },
-        "name": {
-          "name": "name",
-          "type": "varchar(255)",
+        "user_id": {
+          "name": "user_id",
+          "type": "uuid",
           "unsigned": false,
           "autoincrement": false,
           "primary": false,
           "nullable": false,
           "unique": false,
-          "length": 255,
+          "length": null,
           "precision": null,
           "scale": null,
           "default": null,
           "comment": null,
+          "collation": null,
           "enumItems": [],
-          "mappedType": "string"
+          "mappedType": "uuid"
+        }
+      },
+      "indexes": [
+        {
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "constraint": true,
+          "keyName": "notification_pkey",
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "triggers": [],
+      "foreignKeys": {
+        "notification_user_id_foreign": {
+          "columnNames": [
+            "user_id"
+          ],
+          "constraintName": "notification_user_id_foreign",
+          "localTableName": "public.notification",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "public.user"
+        }
+      },
+      "comment": null
+    },
+    {
+      "name": "org",
+      "schema": "public",
+      "columns": {
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamptz(6)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": 6,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "datetime"
         },
         "description": {
           "name": "description",
@@ -732,12 +724,13 @@
           "scale": null,
           "default": "''",
           "comment": null,
+          "collation": null,
           "enumItems": [],
           "mappedType": "string"
         },
         "disabled": {
           "name": "disabled",
-          "type": "bool",
+          "type": "boolean",
           "unsigned": false,
           "autoincrement": false,
           "primary": false,
@@ -748,30 +741,82 @@
           "scale": null,
           "default": "false",
           "comment": null,
+          "collation": null,
           "enumItems": [],
           "mappedType": "boolean"
+        },
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": true,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": "uuid_generate_v4()",
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "uuid"
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": 255,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "string"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamptz(6)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": 6,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "datetime"
         }
       },
-      "name": "org",
-      "schema": "public",
       "indexes": [
         {
           "columnNames": [
             "id"
           ],
           "composite": false,
-          "constraint": false,
+          "constraint": true,
           "keyName": "org_pkey",
-          "unique": true,
-          "primary": true
+          "primary": true,
+          "unique": true
         }
       ],
       "checks": [],
+      "triggers": [],
       "foreignKeys": {},
-      "nativeEnums": {},
       "comment": null
     },
     {
+      "name": "org_member",
+      "schema": "public",
       "columns": {
         "id": {
           "name": "id",
@@ -786,22 +831,7 @@
           "scale": null,
           "default": "uuid_generate_v4()",
           "comment": null,
-          "enumItems": [],
-          "mappedType": "uuid"
-        },
-        "org_id": {
-          "name": "org_id",
-          "type": "uuid",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "unique": false,
-          "length": null,
-          "precision": null,
-          "scale": null,
-          "default": null,
-          "comment": null,
+          "collation": null,
           "enumItems": [],
           "mappedType": "uuid"
         },
@@ -818,6 +848,24 @@
           "scale": null,
           "default": null,
           "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "uuid"
+        },
+        "org_id": {
+          "name": "org_id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "collation": null,
           "enumItems": [],
           "mappedType": "uuid"
         },
@@ -834,6 +882,7 @@
           "scale": null,
           "default": null,
           "comment": null,
+          "collation": null,
           "enumItems": [
             "orgAdmin",
             "orgProjectManager",
@@ -842,21 +891,27 @@
           "mappedType": "enum"
         }
       },
-      "name": "org_member",
-      "schema": "public",
       "indexes": [
         {
           "columnNames": [
             "id"
           ],
           "composite": false,
-          "constraint": false,
+          "constraint": true,
           "keyName": "org_member_pkey",
-          "unique": true,
-          "primary": true
+          "primary": true,
+          "unique": true
         }
       ],
-      "checks": [],
+      "checks": [
+        {
+          "name": "org_member_role_check",
+          "expression": "\"role\" in ('orgAdmin', 'orgProjectManager', 'orgMember')",
+          "definition": "check (\"role\" in ('orgAdmin', 'orgProjectManager', 'orgMember'))",
+          "columnName": "role"
+        }
+      ],
+      "triggers": [],
       "foreignKeys": {
         "org_member_member_id_foreign": {
           "columnNames": [
@@ -864,12 +919,10 @@
           ],
           "constraintName": "org_member_member_id_foreign",
           "localTableName": "public.org_member",
-          "referencedTableName": "public.user",
           "referencedColumnNames": [
             "id"
           ],
-          "updateRule": "cascade",
-          "deleteRule": "no action"
+          "referencedTableName": "public.user"
         },
         "org_member_org_id_foreign": {
           "columnNames": [
@@ -877,35 +930,18 @@
           ],
           "constraintName": "org_member_org_id_foreign",
           "localTableName": "public.org_member",
-          "referencedTableName": "public.org",
           "referencedColumnNames": [
             "id"
           ],
-          "updateRule": "cascade",
-          "deleteRule": "no action"
+          "referencedTableName": "public.org"
         }
       },
-      "nativeEnums": {},
       "comment": null
     },
     {
+      "name": "project",
+      "schema": "public",
       "columns": {
-        "id": {
-          "name": "id",
-          "type": "uuid",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": true,
-          "nullable": false,
-          "unique": false,
-          "length": null,
-          "precision": null,
-          "scale": null,
-          "default": "uuid_generate_v4()",
-          "comment": null,
-          "enumItems": [],
-          "mappedType": "uuid"
-        },
         "created_at": {
           "name": "created_at",
           "type": "timestamptz(6)",
@@ -919,56 +955,9 @@
           "scale": null,
           "default": null,
           "comment": null,
+          "collation": null,
           "enumItems": [],
           "mappedType": "datetime"
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamptz(6)",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "unique": false,
-          "length": 6,
-          "precision": null,
-          "scale": null,
-          "default": null,
-          "comment": null,
-          "enumItems": [],
-          "mappedType": "datetime"
-        },
-        "org_id": {
-          "name": "org_id",
-          "type": "uuid",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "unique": false,
-          "length": null,
-          "precision": null,
-          "scale": null,
-          "default": null,
-          "comment": null,
-          "enumItems": [],
-          "mappedType": "uuid"
-        },
-        "name": {
-          "name": "name",
-          "type": "varchar(255)",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "unique": false,
-          "length": 255,
-          "precision": null,
-          "scale": null,
-          "default": null,
-          "comment": null,
-          "enumItems": [],
-          "mappedType": "string"
         },
         "creator_id": {
           "name": "creator_id",
@@ -983,6 +972,7 @@
           "scale": null,
           "default": null,
           "comment": null,
+          "collation": null,
           "enumItems": [],
           "mappedType": "uuid"
         },
@@ -999,28 +989,30 @@
           "scale": null,
           "default": "''",
           "comment": null,
+          "collation": null,
           "enumItems": [],
           "mappedType": "string"
         },
-        "time_allocated": {
-          "name": "time_allocated",
-          "type": "int4",
+        "id": {
+          "name": "id",
+          "type": "uuid",
           "unsigned": false,
           "autoincrement": false,
-          "primary": false,
+          "primary": true,
           "nullable": false,
           "unique": false,
           "length": null,
-          "precision": 32,
-          "scale": 0,
-          "default": "0",
+          "precision": null,
+          "scale": null,
+          "default": "uuid_generate_v4()",
           "comment": null,
+          "collation": null,
           "enumItems": [],
-          "mappedType": "integer"
+          "mappedType": "uuid"
         },
         "is_complete": {
           "name": "is_complete",
-          "type": "bool",
+          "type": "boolean",
           "unsigned": false,
           "autoincrement": false,
           "primary": false,
@@ -1031,12 +1023,13 @@
           "scale": null,
           "default": "false",
           "comment": null,
+          "collation": null,
           "enumItems": [],
           "mappedType": "boolean"
         },
         "is_hidden": {
           "name": "is_hidden",
-          "type": "bool",
+          "type": "boolean",
           "unsigned": false,
           "autoincrement": false,
           "primary": false,
@@ -1047,25 +1040,93 @@
           "scale": null,
           "default": "false",
           "comment": null,
+          "collation": null,
           "enumItems": [],
           "mappedType": "boolean"
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": 255,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "string"
+        },
+        "org_id": {
+          "name": "org_id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "uuid"
+        },
+        "time_allocated": {
+          "name": "time_allocated",
+          "type": "int",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": "0",
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "integer"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamptz(6)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": 6,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "datetime"
         }
       },
-      "name": "project",
-      "schema": "public",
       "indexes": [
         {
           "columnNames": [
             "id"
           ],
           "composite": false,
-          "constraint": false,
+          "constraint": true,
           "keyName": "project_pkey",
-          "unique": true,
-          "primary": true
+          "primary": true,
+          "unique": true
         }
       ],
       "checks": [],
+      "triggers": [],
       "foreignKeys": {
         "project_creator_id_foreign": {
           "columnNames": [
@@ -1073,12 +1134,10 @@
           ],
           "constraintName": "project_creator_id_foreign",
           "localTableName": "public.project",
-          "referencedTableName": "public.user",
           "referencedColumnNames": [
             "id"
           ],
-          "updateRule": "cascade",
-          "deleteRule": "no action"
+          "referencedTableName": "public.user"
         },
         "project_org_id_foreign": {
           "columnNames": [
@@ -1086,18 +1145,17 @@
           ],
           "constraintName": "project_org_id_foreign",
           "localTableName": "public.project",
-          "referencedTableName": "public.org",
           "referencedColumnNames": [
             "id"
           ],
-          "updateRule": "cascade",
-          "deleteRule": "no action"
+          "referencedTableName": "public.org"
         }
       },
-      "nativeEnums": {},
       "comment": null
     },
     {
+      "name": "project_member",
+      "schema": "public",
       "columns": {
         "id": {
           "name": "id",
@@ -1112,6 +1170,24 @@
           "scale": null,
           "default": "uuid_generate_v4()",
           "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "uuid"
+        },
+        "member_id": {
+          "name": "member_id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "collation": null,
           "enumItems": [],
           "mappedType": "uuid"
         },
@@ -1128,22 +1204,7 @@
           "scale": null,
           "default": null,
           "comment": null,
-          "enumItems": [],
-          "mappedType": "uuid"
-        },
-        "member_id": {
-          "name": "member_id",
-          "type": "uuid",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "unique": false,
-          "length": null,
-          "precision": null,
-          "scale": null,
-          "default": null,
-          "comment": null,
+          "collation": null,
           "enumItems": [],
           "mappedType": "uuid"
         },
@@ -1160,6 +1221,7 @@
           "scale": null,
           "default": null,
           "comment": null,
+          "collation": null,
           "enumItems": [
             "projectAdmin",
             "projectMember",
@@ -1168,21 +1230,27 @@
           "mappedType": "enum"
         }
       },
-      "name": "project_member",
-      "schema": "public",
       "indexes": [
         {
           "columnNames": [
             "id"
           ],
           "composite": false,
-          "constraint": false,
+          "constraint": true,
           "keyName": "project_member_pkey",
-          "unique": true,
-          "primary": true
+          "primary": true,
+          "unique": true
         }
       ],
-      "checks": [],
+      "checks": [
+        {
+          "name": "project_member_role_check",
+          "expression": "\"role\" in ('projectAdmin', 'projectMember', 'projectViewer')",
+          "definition": "check (\"role\" in ('projectAdmin', 'projectMember', 'projectViewer'))",
+          "columnName": "role"
+        }
+      ],
+      "triggers": [],
       "foreignKeys": {
         "project_member_member_id_foreign": {
           "columnNames": [
@@ -1190,12 +1258,10 @@
           ],
           "constraintName": "project_member_member_id_foreign",
           "localTableName": "public.project_member",
-          "referencedTableName": "public.user",
           "referencedColumnNames": [
             "id"
           ],
-          "updateRule": "cascade",
-          "deleteRule": "no action"
+          "referencedTableName": "public.user"
         },
         "project_member_project_id_foreign": {
           "columnNames": [
@@ -1203,34 +1269,34 @@
           ],
           "constraintName": "project_member_project_id_foreign",
           "localTableName": "public.project_member",
-          "referencedTableName": "public.project",
           "referencedColumnNames": [
             "id"
           ],
-          "updateRule": "cascade",
-          "deleteRule": "no action"
+          "referencedTableName": "public.project"
         }
       },
-      "nativeEnums": {},
       "comment": null
     },
     {
+      "name": "user",
+      "schema": "public",
       "columns": {
-        "id": {
-          "name": "id",
-          "type": "uuid",
+        "avatar": {
+          "name": "avatar",
+          "type": "varchar(255)",
           "unsigned": false,
           "autoincrement": false,
-          "primary": true,
+          "primary": false,
           "nullable": false,
           "unique": false,
-          "length": null,
+          "length": 255,
           "precision": null,
           "scale": null,
-          "default": "uuid_generate_v4()",
+          "default": "''",
           "comment": null,
+          "collation": null,
           "enumItems": [],
-          "mappedType": "uuid"
+          "mappedType": "string"
         },
         "created_at": {
           "name": "created_at",
@@ -1245,24 +1311,26 @@
           "scale": null,
           "default": null,
           "comment": null,
+          "collation": null,
           "enumItems": [],
           "mappedType": "datetime"
         },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamptz(6)",
+        "disabled": {
+          "name": "disabled",
+          "type": "boolean",
           "unsigned": false,
           "autoincrement": false,
           "primary": false,
           "nullable": false,
           "unique": false,
-          "length": 6,
+          "length": null,
           "precision": null,
           "scale": null,
-          "default": null,
+          "default": "false",
           "comment": null,
+          "collation": null,
           "enumItems": [],
-          "mappedType": "datetime"
+          "mappedType": "boolean"
         },
         "email": {
           "name": "email",
@@ -1277,6 +1345,7 @@
           "scale": null,
           "default": null,
           "comment": null,
+          "collation": null,
           "enumItems": [],
           "mappedType": "string"
         },
@@ -1293,40 +1362,26 @@
           "scale": null,
           "default": "''",
           "comment": null,
+          "collation": null,
           "enumItems": [],
           "mappedType": "string"
         },
-        "last_name": {
-          "name": "last_name",
-          "type": "varchar(255)",
+        "id": {
+          "name": "id",
+          "type": "uuid",
           "unsigned": false,
           "autoincrement": false,
-          "primary": false,
+          "primary": true,
           "nullable": false,
           "unique": false,
-          "length": 255,
+          "length": null,
           "precision": null,
           "scale": null,
-          "default": "''",
+          "default": "uuid_generate_v4()",
           "comment": null,
+          "collation": null,
           "enumItems": [],
-          "mappedType": "string"
-        },
-        "avatar": {
-          "name": "avatar",
-          "type": "varchar(255)",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "unique": false,
-          "length": 255,
-          "precision": null,
-          "scale": null,
-          "default": "''",
-          "comment": null,
-          "enumItems": [],
-          "mappedType": "string"
+          "mappedType": "uuid"
         },
         "last_login_at": {
           "name": "last_login_at",
@@ -1341,24 +1396,26 @@
           "scale": null,
           "default": null,
           "comment": null,
+          "collation": null,
           "enumItems": [],
           "mappedType": "datetime"
         },
-        "disabled": {
-          "name": "disabled",
-          "type": "bool",
+        "last_name": {
+          "name": "last_name",
+          "type": "varchar(255)",
           "unsigned": false,
           "autoincrement": false,
           "primary": false,
           "nullable": false,
           "unique": false,
-          "length": null,
+          "length": 255,
           "precision": null,
           "scale": null,
-          "default": "false",
+          "default": "''",
           "comment": null,
+          "collation": null,
           "enumItems": [],
-          "mappedType": "boolean"
+          "mappedType": "string"
         },
         "revocation_timestamp": {
           "name": "revocation_timestamp",
@@ -1373,29 +1430,46 @@
           "scale": null,
           "default": null,
           "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "datetime"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamptz(6)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": 6,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "collation": null,
           "enumItems": [],
           "mappedType": "datetime"
         }
       },
-      "name": "user",
-      "schema": "public",
       "indexes": [
         {
           "columnNames": [
             "id"
           ],
           "composite": false,
-          "constraint": false,
+          "constraint": true,
           "keyName": "user_pkey",
-          "unique": true,
-          "primary": true
+          "primary": true,
+          "unique": true
         }
       ],
       "checks": [],
+      "triggers": [],
       "foreignKeys": {},
-      "nativeEnums": {},
       "comment": null
     }
   ],
+  "views": [],
   "nativeEnums": {}
 }

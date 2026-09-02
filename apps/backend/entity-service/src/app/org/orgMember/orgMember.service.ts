@@ -29,7 +29,7 @@ export class OrgMemberService {
     const userRef = this.em.getReference(User, userId);
     const orgRef = this.em.getReference(Org, orgId);
     const orgMember = new OrgMember(userRef, orgRef, role);
-    await this.em.persistAndFlush(orgMember);
+    await this.em.persist(orgMember).flush();
   }
 
   async removeOrgMember(
@@ -45,6 +45,6 @@ export class OrgMemberService {
     if (!orgMember) {
       throw new Error(`User with ID ${memberId} not found`);
     }
-    await localEm.removeAndFlush(orgMember);
+    await localEm.remove(orgMember).flush();
   }
 }

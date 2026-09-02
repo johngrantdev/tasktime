@@ -47,6 +47,9 @@ export class ItemDto {
   @IsBoolean()
   isComplete: boolean;
 
+  @IsBoolean()
+  reqReview: boolean;
+
   @IsString()
   colour: string;
 
@@ -62,6 +65,7 @@ export class ItemDto {
     this.timeAllocated = data.timeAllocated;
     this.timeSpent = data.timeSpent;
     this.isComplete = data.isComplete;
+    this.reqReview = data.reqReview;
     this.colour = data.colour;
   }
 }

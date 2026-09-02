@@ -1,4 +1,9 @@
-import { Entity, Enum, ManyToOne, PrimaryKey } from '@mikro-orm/core';
+import {
+  Entity,
+  Enum,
+  ManyToOne,
+  PrimaryKey,
+} from '@mikro-orm/decorators/legacy';
 import { User } from '../../user/entities/user.entity';
 import { Item } from './item.entity';
 import { ItemMemberRole } from '../enum/itemMemberRole.enum';

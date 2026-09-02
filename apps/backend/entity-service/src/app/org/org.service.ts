@@ -38,7 +38,7 @@ export class OrgService {
   async createOrg(userId: string, newOrg: CreateOrgDto): Promise<OrgDto> {
     const localEm = this.em.fork();
     const org = new Org(newOrg.name);
-    await localEm.persistAndFlush(org);
+    await localEm.persist(org).flush();
     // event triggers
     // - create orgMember
     this.eventEmitter.emit(
@@ -58,7 +58,7 @@ export class OrgService {
       throw new Error(`${orgId} not found.`);
     }
     localEm.assign(org, orgUpdates);
-    this.em.persistAndFlush(org);
+    this.em.persist(org).flush();
     return orgToDto(org);
   }
 
@@ -66,11 +66,11 @@ export class OrgService {
   async deleteOrg(orgId: string): Promise<undefined> {
     const localEm = this.em.fork();
     const orgMembers = await localEm.find(OrgMember, { org: orgId });
-    await localEm.removeAndFlush(orgMembers);
+    await localEm.remove(orgMembers).flush();
     const org = await localEm.findOne(Org, orgId);
     if (!org) {
       throw new Error(`Project with ID ${orgId} not found`);
     }
-    await localEm.removeAndFlush(org);
+    await localEm.remove(org).flush();
   }
 }

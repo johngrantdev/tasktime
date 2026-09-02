@@ -81,7 +81,7 @@ export class ItemAncestryService {
     const items = await qb
       .select('*')
       .where({ id: { $in: itemIds } })
-      .execute();
+      .getResultList();
     const itemDtos = items.map((item) => itemToDto(item));
 
     return { itemIds: itemDtos, relationships: relationships };
@@ -147,7 +147,7 @@ export class ItemAncestryService {
       newAncestry.ancestorItemId,
       newAncestry.descendantItemId,
     );
-    await this.em.persistAndFlush(itemAncestry);
+    await this.em.persist(itemAncestry).flush();
     return {
       ancestorItemId: itemAncestry.ancestor.id,
       descendantItemId: itemAncestry.descendant.id,
@@ -163,6 +163,6 @@ export class ItemAncestryService {
         `ItemAncestry with ID ${data.itemAncestryId} not found`,
       );
     }
-    await this.em.removeAndFlush(itemAncestry);
+    await this.em.remove(itemAncestry).flush();
   }
 }

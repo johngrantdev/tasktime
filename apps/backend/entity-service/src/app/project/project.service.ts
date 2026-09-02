@@ -45,14 +45,14 @@ export class ProjectService {
     const userRef: User = this.em.getReference(User, data.userId);
     const orgRef = this.em.getReference(Org, data.orgId);
     const project = new Project(userRef, orgRef, data.newProject.name);
-    await this.em.persistAndFlush(project);
+    await this.em.persist(project).flush();
     const projectRef = this.em.getReference(Project, project.id);
     const projectMember = new ProjectMember(
       userRef,
       projectRef,
       ProjectMemberRole.Admin,
     );
-    await this.em.persistAndFlush(projectMember);
+    await this.em.persist(projectMember).flush();
     return projectToDto(project);
   }
 
@@ -68,12 +68,12 @@ export class ProjectService {
   async deleteProject(userId: string, projectId: string): Promise<undefined> {
     const projectMembers =
       await this.projectRepository.findMembersByProjectId(projectId);
-    await this.em.removeAndFlush(projectMembers);
+    await this.em.remove(projectMembers).flush();
     const project = await this.projectRepository.findOne(projectId);
     if (!project) {
       throw new Error(`Project with ID ${projectId} not found`);
     }
-    await this.em.removeAndFlush(project);
+    await this.em.remove(project).flush();
 
     this.eventEmitter.emit(
       'project.deleted',
