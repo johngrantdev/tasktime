@@ -14,6 +14,5 @@ export default defineConfig({
     // src/test.tsx is the Vite template's boilerplate spec; excluded rather
     // than repaired, like the backend specs in section 1.8 of the plan.
     include: ['src/**/*.{test,spec}.{ts,tsx}'],
-    passWithNoTests: true,
   },
 });
