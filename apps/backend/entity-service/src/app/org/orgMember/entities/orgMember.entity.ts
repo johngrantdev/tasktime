@@ -10,7 +10,7 @@ import { OrgMemberRole } from '../../enum/orgMemberRole.enum';
 
 @Entity()
 export class OrgMember {
-  @PrimaryKey({ type: 'uuid', defaultRaw: 'uuid_generate_v4()' })
+  @PrimaryKey({ type: 'uuid', defaultRaw: 'gen_random_uuid()' })
   id: string;
 
   @ManyToOne(() => Org)
