@@ -3,16 +3,12 @@ import { CreateNotificationDto } from './dto/createNotification.dto';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { EntityManager } from '@mikro-orm/postgresql';
 import { Notification } from './entities/notification.entity';
-import { InjectRepository } from '@mikro-orm/nestjs';
-import { NotificationRepository } from './repositories/notification.repository';
 import { User } from '../user/entities/user.entity';
 
 @Injectable()
 export class NotificationService {
   constructor(
     private readonly em: EntityManager,
-    @InjectRepository(Notification)
-    private readonly notificationRepository: NotificationRepository,
     private eventEmitter: EventEmitter2,
   ) {}
 
@@ -20,7 +16,8 @@ export class NotificationService {
 
   // todo: return pagnated result instead of all
   async getAllNotifications(userId: string): Promise<Notification[]> {
-    const notifications = await this.notificationRepository.find({
+    const localEm = this.em.fork();
+    const notifications = await localEm.find(Notification, {
       user: userId,
     });
     if (notifications.length === 0) {
@@ -37,8 +34,8 @@ export class NotificationService {
     userId: string,
     notificationId: string,
   ): Promise<Notification | undefined> {
-    const notification =
-      await this.notificationRepository.findOne(notificationId);
+    const localEm = this.em.fork();
+    const notification = await localEm.findOne(Notification, notificationId);
     if (!notification) {
       throw new Error(`${notificationId} not found.`);
     }
@@ -50,11 +47,12 @@ export class NotificationService {
   async createNotification(
     notificationData: CreateNotificationDto,
   ): Promise<Notification> {
+    const localEm = this.em.fork();
     const notification = new Notification();
-    notification.user = this.em.getReference(User, notificationData.user);
+    notification.user = localEm.getReference(User, notificationData.user);
     notification.title = notificationData.title;
     notification.data = notificationData.data;
-    this.em.persist(notification).flush();
+    await localEm.persist(notification).flush();
     return notification;
   }
 
@@ -62,13 +60,13 @@ export class NotificationService {
     notificationId: string,
     newRead: boolean,
   ): Promise<Notification> {
-    const notification =
-      await this.notificationRepository.findOne(notificationId);
+    const localEm = this.em.fork();
+    const notification = await localEm.findOne(Notification, notificationId);
     if (!notification) {
       throw new Error(`${notificationId} not found.`);
     }
     notification.read = newRead;
-    this.em.persist(notification).flush();
+    await localEm.persist(notification).flush();
     return notification;
   }
 
@@ -76,11 +74,12 @@ export class NotificationService {
     userId: string,
     notificationId: string,
   ): Promise<void> {
-    const notification = this.notificationRepository.findOne(notificationId);
+    const localEm = this.em.fork();
+    const notification = await localEm.findOne(Notification, notificationId);
     if (!notification) {
       throw new NotFoundException(this.notFoundError);
     }
-    await this.em.remove(notification).flush();
+    await localEm.remove(notification).flush();
   }
 
   // move to orgService/

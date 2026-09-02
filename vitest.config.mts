@@ -16,6 +16,9 @@ export default defineConfig({
       'apps/backend/entity-service/src/app/app.service.spec.ts',
       'apps/backend/entity-service/src/app/notification/test/notification.controller.spec.ts',
       'apps/backend/entity-service/src/app/notification/test/notification.service.spec.ts',
+      'apps/backend/entity-service/src/app/item/test/item.service.spec.ts',
+      'apps/backend/entity-service/src/app/project/test/project.service.spec.ts',
+      'apps/backend/entity-service/src/app/item/test/itemAncestry.service.spec.ts',
     ],
   },
   resolve: {

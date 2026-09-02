@@ -3,8 +3,6 @@ import { EventEmitter2 } from '@nestjs/event-emitter';
 import { ProjectDeletedEvent } from './event/projectDeleted.event';
 import { EntityManager } from '@mikro-orm/postgresql';
 import { Project } from './entities/project.entity';
-import { InjectRepository } from '@mikro-orm/nestjs';
-import { ProjectRepository } from './repositories/project.repository';
 import { Org } from '../org/entities/org.entity';
 import { User } from '../user/entities/user.entity';
 import { ProjectMember } from './entities/projectMember.entity';
@@ -17,24 +15,25 @@ import { CreateProjectDto, UpdateProjectDto } from 'tasktime-utils';
 export class ProjectService {
   constructor(
     private readonly em: EntityManager,
-    @InjectRepository(Project)
-    private readonly projectRepository: ProjectRepository,
     private eventEmitter: EventEmitter2,
   ) {}
 
   async getAllProjects(userId: string): Promise<ProjectDto[]> {
-    const projectMembers =
-      await this.projectRepository.findProjectsByMemberId(userId);
+    const localEm = this.em.fork();
+    const projectMembers = await localEm.find(ProjectMember, {
+      member: userId,
+    });
     const projectRefs = projectMembers.map(
       (projectMember) => projectMember.project,
     );
-    const projects = await this.projectRepository.find(projectRefs);
+    const projects = await localEm.find(Project, projectRefs);
 
     return projects.map((project) => projectToDto(project));
   }
 
   async getProject(projectId: string): Promise<ProjectDto> {
-    const project = await this.projectRepository.findOne(projectId);
+    const localEm = this.em.fork();
+    const project = await localEm.findOne(Project, projectId);
     if (!project) {
       throw new Error(`Project with ID ${projectId} not found`);
     }
@@ -42,38 +41,41 @@ export class ProjectService {
   }
 
   async createProject(data: CreateProjectDto): Promise<ProjectDto> {
-    const userRef: User = this.em.getReference(User, data.userId);
-    const orgRef = this.em.getReference(Org, data.orgId);
+    const localEm = this.em.fork();
+    const userRef: User = localEm.getReference(User, data.userId);
+    const orgRef = localEm.getReference(Org, data.orgId);
     const project = new Project(userRef, orgRef, data.newProject.name);
-    await this.em.persist(project).flush();
-    const projectRef = this.em.getReference(Project, project.id);
+    await localEm.persist(project).flush();
     const projectMember = new ProjectMember(
       userRef,
-      projectRef,
+      project,
       ProjectMemberRole.Admin,
     );
-    await this.em.persist(projectMember).flush();
+    await localEm.persist(projectMember).flush();
     return projectToDto(project);
   }
 
   async updateProject(data: UpdateProjectDto): Promise<ProjectDto> {
-    const project = await this.projectRepository.findOne(data.projectId);
+    const localEm = this.em.fork();
+    const project = await localEm.findOne(Project, data.projectId);
     if (!project) {
       throw new Error(`Project with ID ${data.projectId} not found`);
     }
-    this.projectRepository.assign(project, data.projectChanges);
+    localEm.assign(project, data.projectChanges);
     return projectToDto(project);
   }
 
   async deleteProject(userId: string, projectId: string): Promise<undefined> {
-    const projectMembers =
-      await this.projectRepository.findMembersByProjectId(projectId);
-    await this.em.remove(projectMembers).flush();
-    const project = await this.projectRepository.findOne(projectId);
+    const localEm = this.em.fork();
+    const projectMembers = await localEm.find(ProjectMember, {
+      project: projectId,
+    });
+    await localEm.remove(projectMembers).flush();
+    const project = await localEm.findOne(Project, projectId);
     if (!project) {
       throw new Error(`Project with ID ${projectId} not found`);
     }
-    await this.em.remove(project).flush();
+    await localEm.remove(project).flush();
 
     this.eventEmitter.emit(
       'project.deleted',
@@ -88,6 +90,14 @@ export class ProjectService {
   }
 
   async getMember(userId: string, projectId: string): Promise<ProjectMember> {
-    return await this.projectRepository.findProjectMember(userId, projectId);
+    const localEm = this.em.fork();
+    const projectMember = await localEm.findOne(ProjectMember, {
+      member: userId,
+      project: projectId,
+    });
+    if (!projectMember) {
+      throw new Error(`${projectId} not found.`);
+    }
+    return projectMember;
   }
 }
