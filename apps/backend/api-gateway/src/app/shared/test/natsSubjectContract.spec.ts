@@ -25,26 +25,42 @@ describe('NATS subject contract', () => {
     const client = makeClient();
     const controller = new ItemController(client);
 
-    await controller.updateItem(req, 'item-id', { name: 'New name' });
+    await controller.updateItem(req, 'org-id', 'project-id', 'item-id', {
+      name: 'New name',
+    });
     expect(client.send).toHaveBeenCalledWith('item.updateItem', {
       userId: 'user-id',
+      orgId: 'org-id',
+      projectId: 'project-id',
       itemId: 'item-id',
       itemChanges: { name: 'New name' },
     });
 
-    await controller.getItemDescendants(req, 'item-id', '3');
+    await controller.getItemDescendants(
+      req,
+      'org-id',
+      'project-id',
+      'item-id',
+      '3',
+    );
     expect(client.send).toHaveBeenCalledWith('item.getDescendants', {
       userId: 'user-id',
+      orgId: 'org-id',
+      projectId: 'project-id',
       itemId: 'item-id',
       inputDepth: 3,
     });
 
-    await controller.createItemAncestry(req, {
+    await controller.createItemAncestry(req, 'org-id', 'project-id', {
       ancestorItemId: 'ancestor-id',
       descendantItemId: 'descendant-id',
     });
+    // itemId is what the ability chain resolves the project and org from
     expect(client.send).toHaveBeenCalledWith('item.createItemAncestry', {
       userId: 'user-id',
+      orgId: 'org-id',
+      projectId: 'project-id',
+      itemId: 'ancestor-id',
       ancestorItemId: 'ancestor-id',
       descendantItemId: 'descendant-id',
     });
