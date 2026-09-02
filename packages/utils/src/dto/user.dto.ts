@@ -8,38 +8,38 @@ import {
   IsOptional,
   IsNotEmpty,
   IsObject,
-} from "class-validator";
+} from 'class-validator';
 
 export class UserEmailDto {
   @IsEmail()
-  email = "";
+  email = '';
 }
 
 export class UserIdDto {
   @IsUUID()
-  id = "";
+  id = '';
 }
 
 export class UserLoginDto {
   @IsEmail()
-  email = "";
+  email = '';
   @IsUrl()
-  url = "";
+  url = '';
 }
 
 export class UserInvitedToOrgDto {
   @IsString()
-  inviteeUserId = "";
+  inviteeUserId = '';
   @IsString()
-  orgId = "";
+  orgId = '';
   @IsString()
-  role = "";
+  role = '';
   @IsString()
-  invitedAt = "";
+  invitedAt = '';
   @IsString()
-  invitedByUserId = "";
+  invitedByUserId = '';
   @IsString()
-  invitedByName = "";
+  invitedByName = '';
 }
 
 export class UserDto {

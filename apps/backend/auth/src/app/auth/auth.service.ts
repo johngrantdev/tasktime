@@ -1,7 +1,12 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { createCipheriv, randomBytes, scrypt, createDecipheriv } from 'crypto';
-import { promisify } from 'util';
+import {
+  createCipheriv,
+  randomBytes,
+  scrypt,
+  createDecipheriv,
+} from 'node:crypto';
+import { promisify } from 'node:util';
 import {
   PasswordlessLoginDto,
   UserLoginDto,
@@ -65,7 +70,7 @@ export class AuthService {
         this.natClient.send('auth.sendLoginLink', payload),
       );
       return { sent: sent };
-    } catch (error) {
+    } catch (_error) {
       return { sent: false };
     }
   }
@@ -75,7 +80,7 @@ export class AuthService {
   ): Promise<EncryptedTokenDto> {
     try {
       const payload = (await this.extractPayload(data.token)) as ITokenPayload;
-      if (!payload || !payload.email) {
+      if (!payload?.email) {
         throw new RpcException(INVALID_TOKEN);
       }
 
@@ -99,7 +104,7 @@ export class AuthService {
 
   async handleVerifyToken(data: EncryptedTokenDto): Promise<TokenPayloadDto> {
     const payload = await this.extractPayload(data.token);
-    if (payload && payload.id && payload.email) {
+    if (payload?.id && payload.email) {
       return new TokenPayloadDto(payload);
     } else {
       throw new RpcException(INVALID_TOKEN);

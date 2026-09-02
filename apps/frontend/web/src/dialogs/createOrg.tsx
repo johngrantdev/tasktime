@@ -4,50 +4,50 @@ import {
   DialogContent,
   DialogTitle,
   DialogDescription,
-  DialogHeader
-} from 'components/ui/dialog'
-import { SingleInput } from 'components/ui/singleInput'
-import { toast } from 'components/ui/use-toast'
-import { useState } from 'react'
+  DialogHeader,
+} from 'components/ui/dialog';
+import { SingleInput } from 'components/ui/singleInput';
+import { toast } from 'components/ui/use-toast';
+import { useState } from 'react';
 
 interface CreateOrgProps {
-  onOrgCreated: () => void
+  onOrgCreated: () => void;
 }
 
 const CreateOrg = ({ onOrgCreated }: CreateOrgProps) => {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
 
   const handleSubmit = (orgName: string) => {
-    setOpen(false)
+    setOpen(false);
     if (orgName) {
-      const apiEndpoint = `${import.meta.env.VITE_SERVER_URL}/org`
-      const token = localStorage.getItem('jwt')
+      const apiEndpoint = `${import.meta.env.VITE_SERVER_URL}/org`;
+      const token = localStorage.getItem('jwt');
       fetch(apiEndpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ name: orgName })
+        body: JSON.stringify({ name: orgName }),
       })
         .then((response) => response.json())
         .then((data) => {
           if (data.id) {
-            onOrgCreated()
+            onOrgCreated();
             toast({
-              description: `${orgName} has been created.`
-            })
+              description: `${orgName} has been created.`,
+            });
           }
           if (data.statusCode === 401) {
             toast({
               variant: 'destructive',
-              description: `${data.statusCode} ${data.message}`
-            })
+              description: `${data.statusCode} ${data.message}`,
+            });
           }
         })
-        .catch((error) => console.error('Error:', error))
+        .catch((error) => console.error('Error:', error));
     }
-  }
+  };
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -68,7 +68,7 @@ const CreateOrg = ({ onOrgCreated }: CreateOrgProps) => {
         />
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};
 
-export default CreateOrg
+export default CreateOrg;

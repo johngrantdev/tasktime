@@ -9,7 +9,7 @@ const Docs = () => {
         Todo
       </p>
     </div>
-  )
-}
+  );
+};
 
-export default Docs
+export default Docs;

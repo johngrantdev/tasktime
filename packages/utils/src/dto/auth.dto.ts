@@ -5,16 +5,16 @@ import {
   IsOptional,
   IsString,
   IsUUID,
-} from "class-validator";
+} from 'class-validator';
 
 export class EncryptedTokenDto {
   @IsString()
-  token = "";
+  token = '';
 }
 
 export class PasswordlessLoginDto {
   @IsEmail()
-  email = "";
+  email = '';
 }
 
 export class TokenPayloadDto {

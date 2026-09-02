@@ -46,7 +46,6 @@ export class AuthController {
   @Post('login')
   @ApiOperation({ summary: 'Initiate passwordless login' })
   @ApiResponse({ status: 200, description: 'Sends an login link via email' })
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async login(@Body() body: PasswordlessLoginDto): Promise<LoginResposneDto> {
     try {
       return await firstValueFrom(
@@ -54,7 +53,7 @@ export class AuthController {
           .send<LoginResposneDto>('auth.loginLinkRequest', body)
           .pipe(timeout(5000)),
       );
-    } catch (error) {
+    } catch (_error) {
       throw new ServiceUnavailableException(SERVICE_UNAVAILABLE_MSG);
     }
   }

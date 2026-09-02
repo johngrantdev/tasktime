@@ -1,6 +1,6 @@
 interface OrgGroupProps {
-  children: React.ReactNode
-  name: string
+  children: React.ReactNode;
+  name: string;
 }
 
 const OrgGroup = ({ name, children }: OrgGroupProps) => {
@@ -9,7 +9,7 @@ const OrgGroup = ({ name, children }: OrgGroupProps) => {
       <div className="mb-4 flex flex-col space-y-1.5">{name}</div>
       <div className={'grid auto-cols-max grid-flow-col gap-4'}>{children}</div>
     </div>
-  )
-}
+  );
+};
 
-export default OrgGroup
+export default OrgGroup;

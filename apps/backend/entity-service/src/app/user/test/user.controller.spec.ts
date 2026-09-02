@@ -79,7 +79,7 @@ describe('UserController', () => {
 
       expect(mockUserService.updateUser).toBeCalledWith(
         mockUserId,
-        mockUpdateUserData
+        mockUpdateUserData,
       );
     });
 
@@ -101,7 +101,7 @@ describe('UserController', () => {
 
       const result = await controller.updateUser(
         mockRequest,
-        mockUpdateUserData
+        mockUpdateUserData,
       );
 
       expect(result).toEqual(expectedResult);

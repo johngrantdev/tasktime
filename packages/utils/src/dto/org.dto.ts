@@ -1,4 +1,4 @@
-import { Type } from "class-transformer";
+import { Type } from 'class-transformer';
 import {
   IsString,
   IsUUID,
@@ -7,7 +7,7 @@ import {
   IsNotEmpty,
   IsObject,
   IsOptional,
-} from "class-validator";
+} from 'class-validator';
 
 export class OrgDto {
   @IsUUID()
@@ -42,23 +42,23 @@ export class AllOrgsDto {
 
 export class GetAllOrgsDto {
   @IsUUID()
-  userId = "";
+  userId = '';
 }
 
 export class GetOrgDto {
   @IsUUID()
-  orgId = "";
+  orgId = '';
 }
 
 export class NewOrgDto {
   @IsString()
   @IsNotEmpty()
-  name = "";
+  name = '';
 }
 
 export class CreateOrgDto {
   @IsUUID()
-  userId = "";
+  userId = '';
 
   @IsObject()
   newOrg: NewOrgDto = new NewOrgDto();
@@ -77,7 +77,7 @@ export class OrgUpdatesDto {
 
 export class UpdateOrgDto {
   @IsUUID()
-  orgId = "";
+  orgId = '';
 
   @IsObject()
   orgUpdates: OrgUpdatesDto = new OrgUpdatesDto();
@@ -85,5 +85,5 @@ export class UpdateOrgDto {
 
 export class DeleteOrgDto {
   @IsUUID()
-  orgId = "";
+  orgId = '';
 }

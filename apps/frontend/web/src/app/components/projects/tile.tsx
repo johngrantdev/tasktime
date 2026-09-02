@@ -1,11 +1,11 @@
-import { Button } from 'components/ui/button'
-import { Link } from 'react-router-dom'
+import { Button } from 'components/ui/button';
+import { Link } from 'react-router-dom';
 
 interface OrgGroupProps {
-  name: string
-  href?: string
-  linkName?: string
-  onClick: () => void
+  name: string;
+  href?: string;
+  linkName?: string;
+  onClick: () => void;
 }
 
 const Tile = ({ name, href, linkName, onClick }: OrgGroupProps) => {
@@ -31,7 +31,7 @@ const Tile = ({ name, href, linkName, onClick }: OrgGroupProps) => {
         ''
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Tile
+export default Tile;

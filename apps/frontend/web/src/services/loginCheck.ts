@@ -1,13 +1,13 @@
 export const loginCheck = async (): Promise<boolean> => {
   const response = await fetch(`http://localhost:3011/api/auth/login/check`, {
-    credentials: 'include'
-  })
+    credentials: 'include',
+  });
 
-  const data = await response.json()
+  const data = await response.json();
 
-  if (data && data.auth) {
-    return true
+  if (data?.auth) {
+    return true;
   } else {
-    return false
+    return false;
   }
-}
+};

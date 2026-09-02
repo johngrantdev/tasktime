@@ -105,7 +105,7 @@ describe('ItemController', () => {
       expect(mockItemService.createItem).toBeCalledWith(
         mockReq.user.id,
         orgId,
-        newItem
+        newItem,
       );
     });
 

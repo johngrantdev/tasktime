@@ -37,7 +37,7 @@ export class ItemService {
   async getItem(itemId: string): Promise<ItemDto> {
     try {
       return itemToDto(await this.itemRepository.findOneOrFail(itemId));
-    } catch (error) {
+    } catch (_error) {
       throw new NotFoundException('item not found');
     }
   }

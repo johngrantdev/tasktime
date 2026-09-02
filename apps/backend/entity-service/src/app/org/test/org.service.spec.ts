@@ -76,8 +76,8 @@ describe('OrgService', () => {
       expect(result).toBeInstanceOf(Array);
       expect(result).toEqual(
         expect.arrayContaining(
-          expectedResult.map((org) => expect.objectContaining(org))
-        )
+          expectedResult.map((org) => expect.objectContaining(org)),
+        ),
       );
     });
   });

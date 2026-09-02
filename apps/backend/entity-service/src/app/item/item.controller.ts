@@ -29,7 +29,7 @@ import {
 export class ItemController {
   constructor(
     private itemService: ItemService,
-    private itemAncestryService: ItemAncestryService
+    private itemAncestryService: ItemAncestryService,
   ) {}
 
   @MessagePattern('item.getAllItems')
@@ -66,7 +66,7 @@ export class ItemController {
   @MessagePattern('item.getDescendants')
   @CheckAbilities(new ViewItemAbility())
   async getItemDescendants(
-    @Payload() data: getItemDescendantsDto
+    @Payload() data: getItemDescendantsDto,
   ): Promise<ItemDescendantsDto> {
     return this.itemAncestryService.getItemDescendants(data);
   }
@@ -74,7 +74,7 @@ export class ItemController {
   @MessagePattern('item.createItemAncestry')
   @CheckAbilities(new CreateItemAbility())
   async createItemAncestry(
-    @Payload() data: CreateItemAncestryDto
+    @Payload() data: CreateItemAncestryDto,
   ): Promise<ItemAncestryRelationshipDto> {
     return await this.itemAncestryService.createItemAncestry(data);
   }
@@ -82,7 +82,7 @@ export class ItemController {
   @MessagePattern('item.deleteItemAncestry')
   @CheckAbilities(new DeleteItemAbility())
   async deleteItemAncestry(
-    @Payload() data: DeleteItemAncestryDto
+    @Payload() data: DeleteItemAncestryDto,
   ): Promise<undefined> {
     await this.itemAncestryService.deleteItemAncestry(data);
   }

@@ -30,7 +30,7 @@ export class MagicLoginGuard implements CanActivate {
         throw new UnauthorizedException('Invalid magic login token');
       }
       return true;
-    } catch (error) {
+    } catch (_error) {
       throw new UnauthorizedException('Error verifying magic login token');
     }
   }

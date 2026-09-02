@@ -1,24 +1,23 @@
-import { NavLink } from 'react-router-dom'
-import { publicRoutes } from 'routes/publicRoutes'
+import { NavLink } from 'react-router-dom';
+import { publicRoutes } from 'routes/publicRoutes';
 
 interface INavItem {
-  path: string
+  path: string;
   handle: {
-    title: string
-    mainNav: boolean
-  }
+    title: string;
+    mainNav: boolean;
+  };
 }
 
 export function MainNav() {
   const mainNav: INavItem[] = publicRoutes
     .filter(
-      (route) =>
-        route.path && route.handle && route.handle.title && route.handle.mainNav
+      (route) => route.path && route.handle?.title && route.handle.mainNav,
     )
     .map((route) => ({
       path: route.path,
-      handle: route.handle
-    })) as INavItem[]
+      handle: route.handle,
+    })) as INavItem[];
 
   const handleProject = (navItem: INavItem, index: number) => {
     return (
@@ -40,8 +39,8 @@ export function MainNav() {
           {navItem.handle.title}
         </NavLink>
       </nav>
-    )
-  }
+    );
+  };
 
   return (
     <div className="mx-4 flex gap-6 md:gap-10">
@@ -49,5 +48,5 @@ export function MainNav() {
         {mainNav.map((navItem, index) => handleProject(navItem, index))}
       </nav>
     </div>
-  )
+  );
 }

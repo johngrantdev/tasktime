@@ -14,7 +14,7 @@ export class UserService {
     let user: UserDto;
     try {
       user = await this.getUserByEmail(email);
-    } catch (error) {
+    } catch (_error) {
       user = await this.createUser(email);
     }
     return { id: user.id };

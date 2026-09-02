@@ -19,10 +19,16 @@ export class Item extends CustomBaseEntity {
   @ManyToOne(() => Project)
   project: Project;
 
-  @OneToMany(() => ItemAncestry, (ancestry) => ancestry.ancestor)
+  @OneToMany(
+    () => ItemAncestry,
+    (ancestry) => ancestry.ancestor,
+  )
   ancestors: Collection<ItemAncestry>;
 
-  @OneToMany(() => ItemAncestry, (ancestry) => ancestry.descendant)
+  @OneToMany(
+    () => ItemAncestry,
+    (ancestry) => ancestry.descendant,
+  )
   descendants: Collection<ItemAncestry>;
 
   @ManyToOne(() => Item, { nullable: true })

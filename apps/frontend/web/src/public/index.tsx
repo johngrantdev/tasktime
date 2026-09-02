@@ -1,14 +1,14 @@
-import Docs from '@/pages/docs'
-import Features from '@/pages/features'
-import NotFound from '@/pages/notFound'
-import { Home } from 'lucide-react'
-import { Suspense } from 'react'
+import Docs from '@/pages/docs';
+import Features from '@/pages/features';
+import NotFound from '@/pages/notFound';
+import { Home } from 'lucide-react';
+import { Suspense } from 'react';
 import {
   Route,
   RouterProvider,
   createBrowserRouter,
-  createRoutesFromElements
-} from 'react-router-dom'
+  createRoutesFromElements,
+} from 'react-router-dom';
 
 const publicRouter = createBrowserRouter(
   createRoutesFromElements(
@@ -41,12 +41,12 @@ const publicRouter = createBrowserRouter(
         }
         handle={{ title: 'Documentation', mainNav: true }}
       />
-    </Route>
-  )
-)
+    </Route>,
+  ),
+);
 
 const Public = () => {
-  return <RouterProvider router={publicRouter} />
-}
+  return <RouterProvider router={publicRouter} />;
+};
 
-export default Public
+export default Public;

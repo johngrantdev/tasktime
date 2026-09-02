@@ -1,4 +1,4 @@
-import { Type } from "class-transformer";
+import { Type } from 'class-transformer';
 import {
   IsBoolean,
   IsDate,
@@ -8,7 +8,7 @@ import {
   IsString,
   IsUUID,
   ValidateNested,
-} from "class-validator";
+} from 'class-validator';
 
 export class ProjectDto {
   @IsString()
@@ -58,23 +58,23 @@ export class ProjectDto {
 // Request DTOs
 export class GetAllPropjectsDto {
   @IsUUID()
-  userId = "";
+  userId = '';
 }
 
 export class GetProjectDto {
   @IsUUID()
-  userId = "";
+  userId = '';
 
   @IsUUID()
-  projectId = "";
+  projectId = '';
 }
 
 export class CreateProjectDto {
   @IsUUID()
-  userId = "";
+  userId = '';
 
   @IsUUID()
-  orgId = "";
+  orgId = '';
 
   @ValidateNested()
   @Type(() => NewProjectDto)
@@ -84,11 +84,11 @@ export class CreateProjectDto {
 export class NewProjectDto {
   @IsString()
   @IsNotEmpty()
-  name = "";
+  name = '';
 
   @IsString()
   @IsNotEmpty()
-  orgId = "";
+  orgId = '';
 
   @IsOptional()
   @IsString()
@@ -97,10 +97,10 @@ export class NewProjectDto {
 
 export class UpdateProjectDto {
   @IsUUID()
-  userId = "";
+  userId = '';
 
   @IsUUID()
-  projectId = "";
+  projectId = '';
 
   @ValidateNested()
   @Type(() => ProjectChangesDto)
@@ -134,8 +134,8 @@ export class ProjectChangesDto {
 
 export class DeleteProjectDto {
   @IsUUID()
-  userId = "";
+  userId = '';
 
   @IsUUID()
-  projectId = "";
+  projectId = '';
 }

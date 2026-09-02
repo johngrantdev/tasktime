@@ -1,24 +1,24 @@
-import React, { useState } from 'react'
-import { Button } from './button'
+import React, { useState } from 'react';
+import { Button } from './button';
 
 type SingleInputProps = {
-  handleEnter: (input: string) => void
-  placeholder: string
-  type: string
-}
+  handleEnter: (input: string) => void;
+  placeholder: string;
+  type: string;
+};
 
 const SingleInput: React.FC<SingleInputProps> = ({
   handleEnter,
   placeholder,
-  type
+  type,
 }) => {
-  const [input, setInput] = useState('')
+  const [input, setInput] = useState('');
 
   const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      handleEnter(input)
+      handleEnter(input);
     }
-  }
+  };
 
   return (
     <div className="flex h-fit w-full rounded-md border border-input p-2 ring-offset-background">
@@ -34,7 +34,7 @@ const SingleInput: React.FC<SingleInputProps> = ({
         <div onClick={() => handleEnter(input)}>Enter</div>
       </Button>
     </div>
-  )
-}
+  );
+};
 
-export { SingleInput }
+export { SingleInput };

@@ -226,7 +226,6 @@ describe('AbilityFactory', () => {
           project: project,
           role: projectRole,
         });
-        import { AuthGuard } from '@nestjs/passport';
         etMember = jest.fn().mockResolvedValue({
           user: user,
           org: org,

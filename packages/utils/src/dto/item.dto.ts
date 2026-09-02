@@ -1,4 +1,4 @@
-import { Type } from "class-transformer";
+import { Type } from 'class-transformer';
 import {
   IsArray,
   IsBoolean,
@@ -9,7 +9,7 @@ import {
   IsString,
   IsUUID,
   ValidateNested,
-} from "class-validator";
+} from 'class-validator';
 
 // Response Dto
 export class ItemDto {
@@ -69,23 +69,23 @@ export class ItemDto {
 // Request DTOs
 export class GetAllItemsDto {
   @IsUUID()
-  userId = "";
+  userId = '';
 }
 
 export class GetItemDto {
   @IsUUID()
-  userId = "";
+  userId = '';
 
   @IsUUID()
-  itemId = "";
+  itemId = '';
 }
 
 export class CreateItemDto {
   @IsUUID()
-  userId = "";
+  userId = '';
 
   @IsUUID()
-  projectId = "";
+  projectId = '';
 
   @ValidateNested()
   @Type(() => NewItemDto)
@@ -95,7 +95,7 @@ export class CreateItemDto {
 export class NewItemDto {
   @IsString()
   @IsNotEmpty()
-  name = "";
+  name = '';
 
   @IsOptional()
   @IsString()
@@ -120,10 +120,10 @@ export class NewItemDto {
 
 export class UpdateItemDto {
   @IsUUID()
-  userId = "";
+  userId = '';
 
   @IsUUID()
-  itemId = "";
+  itemId = '';
 
   @ValidateNested()
   @Type(() => ItemChangesDto)
@@ -170,18 +170,18 @@ export class ItemChangesDto {
 
 export class DeleteItemDto {
   @IsUUID()
-  userId = "";
+  userId = '';
 
   @IsUUID()
-  itemId = "";
+  itemId = '';
 }
 
 export class getItemDescendantsDto {
   @IsUUID()
-  userId = "";
+  userId = '';
 
   @IsUUID()
-  itemId = "";
+  itemId = '';
 
   @IsNumber()
   inputDepth = -1;
@@ -189,23 +189,23 @@ export class getItemDescendantsDto {
 
 export class CreateItemAncestryDto {
   @IsUUID()
-  userId = "";
+  userId = '';
 
   @IsUUID()
   @IsNotEmpty()
-  ancestorItemId = "";
+  ancestorItemId = '';
 
   @IsUUID()
   @IsNotEmpty()
-  descendantItemId = "";
+  descendantItemId = '';
 }
 
 export class DeleteItemAncestryDto {
   @IsUUID()
-  userId = "";
+  userId = '';
 
   @IsUUID()
-  itemAncestryId = "";
+  itemAncestryId = '';
 }
 
 // Response Dtos
@@ -213,11 +213,11 @@ export class DeleteItemAncestryDto {
 export class ItemAncestryRelationshipDto {
   @IsUUID()
   @IsNotEmpty()
-  ancestorItemId = "";
+  ancestorItemId = '';
 
   @IsUUID()
   @IsNotEmpty()
-  descendantItemId = "";
+  descendantItemId = '';
 }
 
 export class ItemDescendantsDto {

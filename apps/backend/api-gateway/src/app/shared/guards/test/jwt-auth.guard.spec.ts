@@ -48,7 +48,7 @@ describe('jwtAuthGuard', () => {
 
       // Mock the behavior of super.canActivate()
       const superCanActivateMock = jest.fn();
-      service['canActivate'] = superCanActivateMock;
+      service.canActivate = superCanActivateMock;
 
       const context = new ExecutionContextHost([
         { getClass: jest.fn(), getHandler: jest.fn() }, // Simulate context data

@@ -1,8 +1,8 @@
-import { siteConfig } from '../../../config/site'
-import { animated, useSpring } from '@react-spring/web'
+import { siteConfig } from '../../../config/site';
+import { animated, useSpring } from '@react-spring/web';
 
 interface TitleProps {
-  pageTitle: string
+  pageTitle: string;
 }
 
 export function Title({ pageTitle }: TitleProps) {
@@ -10,8 +10,8 @@ export function Title({ pageTitle }: TitleProps) {
     from: { opacity: 0 },
     to: { opacity: 1 },
     reset: true, // resets the animation each time
-    config: { tension: 280, friction: 60 } // adjust for desired effect
-  })
+    config: { tension: 280, friction: 60 }, // adjust for desired effect
+  });
 
   return (
     <>
@@ -27,5 +27,5 @@ export function Title({ pageTitle }: TitleProps) {
         {pageTitle !== 'Home' ? pageTitle.toLowerCase() : ''}
       </animated.span>
     </>
-  )
+  );
 }

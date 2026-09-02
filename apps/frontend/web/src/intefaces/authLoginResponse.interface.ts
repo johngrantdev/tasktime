@@ -1,5 +1,5 @@
 export interface IAuthLoginResponse {
-  auth: boolean
-  title: string
-  description: string
+  auth: boolean;
+  title: string;
+  description: string;
 }

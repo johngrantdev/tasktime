@@ -1,4 +1,4 @@
-import { Login } from 'dialogs/login'
+import { Login } from 'dialogs/login';
 
 const Features = () => {
   return (
@@ -12,7 +12,7 @@ const Features = () => {
       </p>
       <Login />
     </div>
-  )
-}
+  );
+};
 
-export default Features
+export default Features;

@@ -1,9 +1,9 @@
-import { Link } from 'react-router-dom'
-import { Button } from 'components/ui/button'
-import { Login } from 'dialogs/login'
+import { Link } from 'react-router-dom';
+import { Button } from 'components/ui/button';
+import { Login } from 'dialogs/login';
 
 interface LaunchButtonProps {
-  userLoggedIn: boolean
+  userLoggedIn: boolean;
 }
 
 export function LaunchButton({ userLoggedIn }: LaunchButtonProps) {
@@ -17,5 +17,5 @@ export function LaunchButton({ userLoggedIn }: LaunchButtonProps) {
         <Login />
       )}
     </>
-  )
+  );
 }

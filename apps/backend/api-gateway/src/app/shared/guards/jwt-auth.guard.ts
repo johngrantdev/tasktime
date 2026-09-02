@@ -42,7 +42,7 @@ export class JwtAuthGuard implements CanActivate {
       );
 
       // If the token contains a valid payload
-      if (jwtPayload && jwtPayload.id && jwtPayload.email) {
+      if (jwtPayload?.id && jwtPayload.email) {
         const getUserRequest: GetUserDto = {
           userId: jwtPayload.id,
           email: jwtPayload.email,
@@ -64,7 +64,7 @@ export class JwtAuthGuard implements CanActivate {
         }
       }
       return false;
-    } catch (error) {
+    } catch (_error) {
       // If there's any error, consider the JWT invalid.
       return false;
     }

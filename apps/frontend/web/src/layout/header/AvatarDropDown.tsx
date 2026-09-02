@@ -1,65 +1,65 @@
-import { siteConfig } from '../../../config/site'
-import { Link, useNavigate } from 'react-router-dom'
-import { Avatar, AvatarFallback, AvatarImage } from 'components/ui/avatar'
+import { siteConfig } from '../../../config/site';
+import { Link, useNavigate } from 'react-router-dom';
+import { Avatar, AvatarFallback, AvatarImage } from 'components/ui/avatar';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuTrigger
-} from 'components/ui/dropdown-menu'
-import { logout } from '@/services/logout'
-import { useTheme } from '@/components/theme-provider'
-import ProfileDialog from '@/dialogs/profile'
-import { useEffect, useRef, useState } from 'react'
-import React from 'react'
+  DropdownMenuTrigger,
+} from 'components/ui/dropdown-menu';
+import { logout } from '@/services/logout';
+import { useTheme } from '@/components/theme-provider';
+import ProfileDialog from '@/dialogs/profile';
+import { useEffect, useRef, useState } from 'react';
+import React from 'react';
 
 interface AvatarDropDownProps {
-  firstName: string
-  lastName: string
-  setUserLoggedIn: React.Dispatch<React.SetStateAction<boolean>>
-  avatarImg?: string
+  firstName: string;
+  lastName: string;
+  setUserLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+  avatarImg?: string;
 }
 
 const nameToInitials = (firstName: string, lastName: string) => {
-  const firstInitial = firstName ? firstName.charAt(0).toUpperCase() : ''
-  const lastInitial = lastName ? lastName.charAt(0).toUpperCase() : ''
-  return firstInitial + lastInitial
-}
+  const firstInitial = firstName ? firstName.charAt(0).toUpperCase() : '';
+  const lastInitial = lastName ? lastName.charAt(0).toUpperCase() : '';
+  return firstInitial + lastInitial;
+};
 
 const AvatarDropDown = ({
   firstName,
   lastName,
   setUserLoggedIn,
-  avatarImg = ''
+  avatarImg = '',
 }: AvatarDropDownProps) => {
-  const { theme, setTheme } = useTheme()
+  const { theme, setTheme } = useTheme();
   const toggleTheme = () => {
     if (theme === 'light') {
-      setTheme('dark')
+      setTheme('dark');
     } else {
-      setTheme('light')
+      setTheme('light');
     }
-  }
+  };
 
   // State definitions
-  const [dropdownOpen, setDropdownOpen] = useState(false)
-  const [profileOpen, setProfileOpen] = useState(false)
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
   // trigger profile open is used to undertake required steps before
   // the profile can be opened.
-  const [triggerProfileOpen, setTriggerProfileOpen] = useState(false)
+  const [triggerProfileOpen, setTriggerProfileOpen] = useState(false);
   // trigger profile closed is used to undertake required steps before
   // the dropdown can be opened and focus brought back to the profile menu item.
-  const [triggerProfileClosed, setTriggerProfileClosed] = useState(false)
+  const [triggerProfileClosed, setTriggerProfileClosed] = useState(false);
 
-  const dropdownProfileRef = useRef<HTMLDivElement>(null)
+  const dropdownProfileRef = useRef<HTMLDivElement>(null);
 
   // Function to handle user logout
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const logOut = () => {
-    logout()
-    setUserLoggedIn(false)
-    navigate('/')
-  }
+    logout();
+    setUserLoggedIn(false);
+    navigate('/');
+  };
 
   // Effect to manage the opening and closing of modals
   // specificly the dropdown and profile dialog modals
@@ -68,24 +68,24 @@ const AvatarDropDown = ({
     // 1. dropdown state is set to close when clicked
     // 2. once the dropdown is closed, only then open profile dialog
     if (!dropdownOpen && triggerProfileOpen) {
-      setProfileOpen(true)
-      setTriggerProfileOpen(false)
+      setProfileOpen(true);
+      setTriggerProfileOpen(false);
     }
     // Profile close effects
     // 1. once triggerProfileClosed is set -> set profile open to false
     if (profileOpen && triggerProfileClosed) {
-      setProfileOpen(false)
+      setProfileOpen(false);
     }
     // 2. Once profile dialog is closed open dropdown
     if (!profileOpen && triggerProfileClosed) {
-      setDropdownOpen(true)
+      setDropdownOpen(true);
     }
     // 3. Then once dropdown is open, focus back to profile item
     if (dropdownOpen && triggerProfileClosed) {
-      dropdownProfileRef.current?.focus()
-      setTriggerProfileClosed(false)
+      dropdownProfileRef.current?.focus();
+      setTriggerProfileClosed(false);
     }
-  }, [triggerProfileOpen, dropdownOpen, profileOpen, triggerProfileClosed])
+  }, [triggerProfileOpen, dropdownOpen, profileOpen, triggerProfileClosed]);
 
   return (
     <>
@@ -107,7 +107,7 @@ const AvatarDropDown = ({
             ref={dropdownProfileRef}
             onSelect={() => setTriggerProfileOpen(true)}
             className=" h-full w-full cursor-pointer"
-          > 
+          >
             Profile
           </DropdownMenuItem>
 
@@ -149,7 +149,7 @@ const AvatarDropDown = ({
         onOpenChange={() => setTriggerProfileClosed(true)}
       />
     </>
-  )
-}
+  );
+};
 
-export default AvatarDropDown
+export default AvatarDropDown;

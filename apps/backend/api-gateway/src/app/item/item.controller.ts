@@ -10,7 +10,6 @@ import {
   Body,
   Query,
 } from '@nestjs/common';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { NewItemDto } from './dto/newItem.dto';
 import { ApiTags } from '@nestjs/swagger';
 

@@ -1,8 +1,5 @@
-import React from 'react'
-import { useTheme } from '../../components/theme-provider'
-
 interface themeToggleProps {
-  className: string
+  className: string;
 }
 
 export function ThemeToggle({ className }: themeToggleProps) {
@@ -10,5 +7,5 @@ export function ThemeToggle({ className }: themeToggleProps) {
     <div className={className} onClick={toggleTheme}>
       <span className="sr-only">Toggle theme</span>
     </div>
-  )
+  );
 }

@@ -102,7 +102,7 @@ describe('ProjectController', () => {
       expect(mockProjectService.createProject).toBeCalledWith(
         mockReq.user.id,
         orgId,
-        newProject
+        newProject,
       );
     });
 
@@ -135,7 +135,7 @@ describe('ProjectController', () => {
       await controller.updateProject(projectId, projectUpdates);
       expect(mockProjectService.updateProject).toBeCalledWith(
         projectId,
-        projectUpdates
+        projectUpdates,
       );
     });
 
@@ -166,7 +166,7 @@ describe('ProjectController', () => {
       await controller.deleteProject(mockReq, projectId);
       expect(mockProjectService.deleteProject).toBeCalledWith(
         mockReq.user.id,
-        projectId
+        projectId,
       );
     });
 
