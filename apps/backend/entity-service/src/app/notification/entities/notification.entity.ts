@@ -8,7 +8,7 @@ import { CustomBaseEntity } from '../../shared/entities/customBase.entity';
 import { User } from '../../user/entities/user.entity';
 import { NotificationRepository } from '../repositories/notification.repository';
 
-@Entity({ customRepository: () => NotificationRepository })
+@Entity({ repository: () => NotificationRepository })
 export class Notification extends CustomBaseEntity {
   [EntityRepositoryType]?: NotificationRepository;
 

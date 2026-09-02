@@ -13,8 +13,8 @@ export class MailService {
     private mailerService: MailerService,
     private readonly configService: ConfigService,
   ) {
-    this.appName = this.configService.get<string>('APP_NAME');
-    this.appUrl = this.configService.get<string>('SERVER_URL');
+    this.appName = this.configService.get<string>('APP_NAME') || '';
+    this.appUrl = this.configService.get<string>('SERVER_URL') || '';
   }
 
   async sendLoginLink(payload: UserLoginDto) {

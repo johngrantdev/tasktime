@@ -78,7 +78,7 @@ export class CreateProjectDto {
 
   @ValidateNested()
   @Type(() => NewProjectDto)
-  newProject = NewProjectDto;
+  newProject!: NewProjectDto;
 }
 
 export class NewProjectDto {
@@ -104,7 +104,7 @@ export class UpdateProjectDto {
 
   @ValidateNested()
   @Type(() => ProjectChangesDto)
-  projectChanges = ProjectChangesDto;
+  projectChanges!: ProjectChangesDto;
 }
 
 export class ProjectChangesDto {

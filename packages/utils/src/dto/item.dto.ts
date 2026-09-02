@@ -89,7 +89,7 @@ export class CreateItemDto {
 
   @ValidateNested()
   @Type(() => NewItemDto)
-  newItem = NewItemDto;
+  newItem!: NewItemDto;
 }
 
 export class NewItemDto {
@@ -127,7 +127,7 @@ export class UpdateItemDto {
 
   @ValidateNested()
   @Type(() => ItemChangesDto)
-  itemChanges = ItemChangesDto;
+  itemChanges!: ItemChangesDto;
 }
 
 export class ItemChangesDto {

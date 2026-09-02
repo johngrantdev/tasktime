@@ -67,7 +67,7 @@ export class ItemService {
     if (!item) {
       throw new Error(`${data.itemId} not found.`);
     }
-    this.itemRepository.assign(item, new data.itemChanges());
+    this.itemRepository.assign(item, data.itemChanges);
     await this.em.persistAndFlush(item);
     return itemToDto(item);
   }

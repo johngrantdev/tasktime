@@ -25,7 +25,7 @@ import { UserModule } from './user/user.module';
     }),
     MikroOrmModule.forRootAsync({
       imports: [ConfigModule],
-      useFactory: () => mikroOrmConfig(),
+      useFactory: () => mikroOrmConfig,
       inject: [ConfigService],
     }),
   ],

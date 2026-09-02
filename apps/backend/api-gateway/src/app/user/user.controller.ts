@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Inject, Patch, Req } from '@nestjs/common';
 import { UpdateUserDto } from './dto/updateUser.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { User } from './entities/user.entity';
+import { UserDto } from 'tasktime-utils';
 import { ClientProxy } from '@nestjs/microservices';
 import { firstValueFrom } from 'rxjs';
 import { AuthenticatedRequest } from '../shared/interfaces/authenticatedRequest';
@@ -16,7 +16,7 @@ export class UserController {
   ) {}
 
   @Get()
-  async getProfile(@Req() req: AuthenticatedRequest): Promise<User> {
+  async getProfile(@Req() req: AuthenticatedRequest): Promise<UserDto> {
     return await firstValueFrom(
       this.natClient.send('entity.getUser', { userId: req.user.id }),
     );
@@ -26,7 +26,7 @@ export class UserController {
   async updateUser(
     @Req() req: AuthenticatedRequest,
     @Body() updates: UpdateUserDto,
-  ): Promise<User> {
+  ): Promise<UserDto> {
     return await firstValueFrom(
       this.natClient.send('entity.updateUser', {
         userId: req.user.id,

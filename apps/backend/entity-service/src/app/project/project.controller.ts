@@ -9,7 +9,14 @@ import {
   ViewProjectAbility,
 } from '../ability/ability.objects';
 import { MessagePattern, Payload } from '@nestjs/microservices';
-import { ProjectDto } from 'tasktime-utils';
+import {
+  CreateProjectDto,
+  DeleteProjectDto,
+  GetAllPropjectsDto,
+  GetProjectDto,
+  ProjectDto,
+  UpdateProjectDto,
+} from 'tasktime-utils';
 
 @Controller()
 @ApiTags('project')
@@ -18,37 +25,33 @@ export class ProjectController {
 
   @MessagePattern('project.getAllProjects')
   // @CheckAbilities(new ViewProjectAbility())
-  async getAllProjects(@Payload() data): Promise<ProjectDto[]> {
+  async getAllProjects(
+    @Payload() data: GetAllPropjectsDto,
+  ): Promise<ProjectDto[]> {
     return await this.projectService.getAllProjects(data.userId);
   }
 
   @MessagePattern('project.getProject')
   @CheckAbilities(new ViewProjectAbility())
-  async getProject(@Payload() data): Promise<ProjectDto> {
+  async getProject(@Payload() data: GetProjectDto): Promise<ProjectDto> {
     return await this.projectService.getProject(data.projectId);
   }
 
   @MessagePattern('project.createProject')
   @CheckAbilities(new CreateProjectAbility())
-  async createProject(@Payload() data): Promise<ProjectDto> {
-    return await this.projectService.createProject(
-      data.userId,
-      data.newProject
-    );
+  async createProject(@Payload() data: CreateProjectDto): Promise<ProjectDto> {
+    return await this.projectService.createProject(data);
   }
 
   @MessagePattern('project.updateProject')
   @CheckAbilities(new UpdateProjectAbility())
-  async updateProject(@Payload() data): Promise<ProjectDto> {
-    return await this.projectService.updateProject(
-      data.projectId,
-      data.projectUpdates
-    );
+  async updateProject(@Payload() data: UpdateProjectDto): Promise<ProjectDto> {
+    return await this.projectService.updateProject(data);
   }
 
   @MessagePattern('project.deleteProject')
   @CheckAbilities(new DeleteProjectAbility())
-  async deleteProject(@Payload() data) {
+  async deleteProject(@Payload() data: DeleteProjectDto) {
     await this.projectService.deleteProject(data.userId, data.projectId);
   }
 }

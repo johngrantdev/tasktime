@@ -34,7 +34,11 @@ export class ProjectService {
   }
 
   async getProject(projectId: string): Promise<ProjectDto> {
-    return projectToDto(await this.projectRepository.findOne(projectId));
+    const project = await this.projectRepository.findOne(projectId);
+    if (!project) {
+      throw new Error(`Project with ID ${projectId} not found`);
+    }
+    return projectToDto(project);
   }
 
   async createProject(data: CreateProjectDto): Promise<ProjectDto> {
@@ -54,7 +58,10 @@ export class ProjectService {
 
   async updateProject(data: UpdateProjectDto): Promise<ProjectDto> {
     const project = await this.projectRepository.findOne(data.projectId);
-    this.projectRepository.assign(project, new data.projectChanges());
+    if (!project) {
+      throw new Error(`Project with ID ${data.projectId} not found`);
+    }
+    this.projectRepository.assign(project, data.projectChanges);
     return projectToDto(project);
   }
 
