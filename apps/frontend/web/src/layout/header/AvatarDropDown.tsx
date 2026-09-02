@@ -1,4 +1,4 @@
-import { siteConfig } from '../../../config/site';
+import { siteConfig } from '@/config/site';
 import { Link, useNavigate } from 'react-router-dom';
 import { Avatar, AvatarFallback, AvatarImage } from 'components/ui/avatar';
 import {
@@ -111,10 +111,15 @@ const AvatarDropDown = ({
             Profile
           </DropdownMenuItem>
 
-          <DropdownMenuItem onSelect={(e) => e.preventDefault()} asChild={true}>
-            <div className="h-full w-full cursor-pointer" onClick={toggleTheme}>
-              {theme === 'light' ? 'Dark Mode' : 'Light Mode'}
-            </div>
+          <DropdownMenuItem
+            onSelect={(e) => {
+              // keep the menu open so the theme can be toggled back
+              e.preventDefault();
+              toggleTheme();
+            }}
+            className="h-full w-full cursor-pointer"
+          >
+            {theme === 'light' ? 'Dark Mode' : 'Light Mode'}
           </DropdownMenuItem>
           <DropdownMenuItem asChild={true}>
             <Link

@@ -60,7 +60,7 @@ const ProfileDialog = ({ modal, open, onOpenChange }: profileDialogProps) => {
 
         <Input placeholder="First Name" type="text" />
         <Input placeholder="Last Name" type="text" />
-        <Button on>Update</Button>
+        <Button>Update</Button>
       </DialogContent>
     </Dialog>
   );

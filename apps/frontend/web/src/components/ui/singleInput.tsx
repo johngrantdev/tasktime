@@ -30,8 +30,13 @@ const SingleInput: React.FC<SingleInputProps> = ({
         onChange={(e) => setInput(e.target.value)}
         onKeyDown={(e) => handleKeyUp(e)}
       />
-      <Button asChild className={'m-0'} variant={'outline'} size={'sm'}>
-        <div onClick={() => handleEnter(input)}>Enter</div>
+      <Button
+        className={'m-0'}
+        variant={'outline'}
+        size={'sm'}
+        onClick={() => handleEnter(input)}
+      >
+        Enter
       </Button>
     </div>
   );

@@ -1,4 +1,4 @@
-import { siteConfig } from '../../../config/site';
+import { siteConfig } from '@/config/site';
 import { animated, useSpring } from '@react-spring/web';
 
 interface TitleProps {

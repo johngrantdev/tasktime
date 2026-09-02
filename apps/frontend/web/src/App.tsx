@@ -19,7 +19,6 @@ function App() {
   const [routesReady, setRoutesReady] = useState(false);
   const [redirect, setRedirect] = useState('');
 
-  let protectedRoutes;
   // Pageload effects
   // 1. handles presence of login token in url path ie. a login link
   //    a. authenticates token
@@ -44,17 +43,7 @@ function App() {
           description: response.description,
         });
       } else {
-        // check auth and get protected routes
-        const response = await loginCheck();
-        if (response) {
-          setUserLoggedIn(true);
-          const module = await import(
-            `http://localhost:3011/api/app/routes.tsx`
-          );
-          protectedRoutes = module.protectedRoutes;
-        } else {
-          setUserLoggedIn(false);
-        }
+        setUserLoggedIn(await loginCheck());
       }
       setRoutesReady(true);
     };
@@ -102,7 +91,6 @@ function App() {
         }
         handle={{ title: 'Documentation', mainNav: true }}
       />
-      {userLoggedIn && protectedRoutes}
     </Route>
   );
 

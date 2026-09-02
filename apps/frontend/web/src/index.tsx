@@ -1,5 +1,4 @@
 import { createRoot } from 'react-dom/client';
-import 'tailwindcss/tailwind.css';
 import App from './App';
 import 'styles/globals.css';
 import { ThemeProvider } from './components/theme-provider';

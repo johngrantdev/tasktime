@@ -1,6 +1,6 @@
 import { buttonVariants } from 'components/ui/button';
 import { Link } from 'react-router-dom';
-import { siteConfig } from '../../../config/site';
+import { siteConfig } from '@/config/site';
 
 const Home = () => {
   return (

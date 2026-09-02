@@ -31,7 +31,7 @@ export const authLoginToken = async (
     return {
       auth: false,
       title: `Error`,
-      description: error.toString(), // Ensure error is converted to string
+      description: String(error),
     } as IAuthLoginResponse;
   }
 };
