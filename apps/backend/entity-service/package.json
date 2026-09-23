@@ -16,16 +16,16 @@
     "typecheck": "tsc --project tsconfig.json --noEmit"
   },
   "dependencies": {
-    "@casl/ability": "^6.7.1",
-    "@mikro-orm/core": "^7.1.14",
-    "@mikro-orm/decorators": "^7.1.14",
+    "@casl/ability": "^7.0.1",
+    "@mikro-orm/core": "^7.2.1",
+    "@mikro-orm/decorators": "^7.2.1",
     "@mikro-orm/nestjs": "^7.1.0",
-    "@mikro-orm/postgresql": "^7.1.14",
+    "@mikro-orm/postgresql": "^7.2.1",
     "tasktime-utils": "workspace:*"
   },
   "devDependencies": {
-    "@mikro-orm/cli": "^7.1.14",
-    "@mikro-orm/migrations": "^7.1.14"
+    "@mikro-orm/cli": "^7.2.1",
+    "@mikro-orm/migrations": "^7.2.1"
   },
   "mikro-orm": {
     "configPaths": [
