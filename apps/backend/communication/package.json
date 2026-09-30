@@ -15,10 +15,10 @@
   },
   "dependencies": {
     "handlebars": "^4.7.8",
-    "nodemailer": "^9.1.1",
+    "nodemailer": "^10.0.11",
     "tasktime-utils": "workspace:*"
   },
   "devDependencies": {
-    "@types/nodemailer": "^8.0.1"
+    "@types/nodemailer": "^8.0.2"
   }
 }
