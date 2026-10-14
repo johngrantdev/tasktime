@@ -14,11 +14,11 @@
     "typecheck": "tsc --project tsconfig.json --noEmit"
   },
   "dependencies": {
-    "handlebars": "^4.7.8",
-    "nodemailer": "^9.1.1",
+    "handlebars": "^4.7.10",
+    "nodemailer": "^10.1.0",
     "tasktime-utils": "workspace:*"
   },
   "devDependencies": {
-    "@types/nodemailer": "^8.0.1"
+    "@types/nodemailer": "^8.0.2"
   }
 }
